@@ -3,13 +3,16 @@
   margin-top:100px;
   padding:30px;
   color:$gray-lighter;
+  background: $gray-dark;
  a{
-    color: $orange;
+    color: $greenish;
   };
   a:hover{
-    color:#D18600
+    color:$brownish;
+  };
+  .container{
+    padding:10px;
   }
-  background: $gray-dark;
 
 }
 
