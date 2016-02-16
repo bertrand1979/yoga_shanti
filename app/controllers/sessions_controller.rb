@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :find_lesson, :find_user, only: [ :new, :create, :show, :update, :destroy ]
+  before_action :find_lesson, :find_user, only: [ :new, :create, :show, :update, :destroy, :edit, :update ]
 
   def index
     @sessions = Session.all
