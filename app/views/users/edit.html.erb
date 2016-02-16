@@ -1,0 +1,29 @@
+<div class="container text-center padded">
+<%= image_tag(@user.picture, html_option = {class:"img-circle", width:"100px"}) %>
+  <h2>My info</h2>
+</div>
+<div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <%= simple_form_for @user do |f| %>
+      <%= f.input:first_name %>
+      <%= f.input:last_name %>
+      <%= f.input:email %>
+      <%= f.input:birth_date %>
+      <%= f.input:description, placeholder:"Tell us more about you" %>
+      <%= f.input:start_date, label:"You started yoga in"%>
+      <%= f.button:submit, class:"btn btn-primary", value:"Save changes" %>
+      <%end%>
+
+    </div>
+  </div>
+</div>
+      <!-- <ul class="list-unstyled">
+        <li>First name : <%= @user.first_name.capitalize %></li>
+        <li>Last name : <%= @user.last_name.capitalize %></li>
+        <li>Email : <%= @user.email %></li>
+        <li>Password : ******** </li>
+        <li>Birthdate : <%= @user.birth_date %></li>
+        <li>Description : <%= @user.description %></li>
+        <li>You started Yoga in : <%= @user.start_date %></li>
+      </ul> -->
