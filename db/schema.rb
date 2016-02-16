@@ -10,7 +10,6 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
 ActiveRecord::Schema.define(version: 20160216091155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160216091155) do
   end
 
   add_index "lessons", ["user_id"], name: "index_lessons_on_user_id", using: :btree
+
 
   create_table "sessions", force: :cascade do |t|
     t.boolean  "conf_status"
@@ -71,4 +71,5 @@ ActiveRecord::Schema.define(version: 20160216091155) do
   add_foreign_key "lessons", "users"
   add_foreign_key "sessions", "lessons"
   add_foreign_key "sessions", "users"
+
 end
