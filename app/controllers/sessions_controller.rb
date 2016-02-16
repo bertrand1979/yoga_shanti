@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :find_lesson, only: [ :new, :create, :show, :update, :destroy ]
+  before_action :find_lesson, :find_user, only: [ :new, :create, :show, :update, :destroy ]
 
   def index
     @sessions = Session.all
@@ -14,23 +14,28 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @session = @lesson.sessions.build(review_params)
-    @session.save
-    redirect_to user_lesson_session_path(@session)
+    @session = @lesson.sessions.build(session_params)
+    if @session.save
+    redirect_to user_lesson_session_path(@user)
+    else
+      render :new
+    end
   end
 
   def edit
   end
 
   def update
-    if @session.update(lesson_params)
-      redirect_to user_lesson_session_path(@session)
+    if @session.update(session_params)
+      redirect_to user_lesson_session_path(@user)
     else
       render :new
     end
   end
 
   def destroy
+    @session.destroy
+    redirect_to user_lesson_session_path(@user)
   end
 
 
@@ -42,6 +47,9 @@ class SessionsController < ApplicationController
 
   def find_lesson
     @lesson = Lesson.find(params[:lesson_id])
+  end
+  def find_user
+    @user = User.find(params[:user_id])
   end
 
 end
