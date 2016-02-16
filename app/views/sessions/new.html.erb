@@ -1,2 +1,5 @@
 <h1>Add a date to your lesson to create your session</h1>
-<%= render "_form"%>
+<%= simple_form_for [@user, @lesson, @session] do |f| %>
+  <%= f.input :starts_at %>
+  <%= f.submit "add a session" %>
+<% end %>

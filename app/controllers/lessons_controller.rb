@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-before_action :find_user, except: [ :new, :edit, :update, :create]
+before_action :find_user, only: [ :new, :edit, :update, :create]
 
   def index
     @lessons = Lesson.all

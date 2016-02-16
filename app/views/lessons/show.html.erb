@@ -1,2 +1,4 @@
-<h1>Lessons#show</h1>
-<p>Find me in app/views/lessons/show.html.erb</p>
+<h2><%= @lesson.name %></h2>
+<p><%= @lesson.address %></p>
+<p><%= @lesson.description %></p>
+<%= link_to 'Add a session', new_user_lesson_session_path(@lesson.user, @lesson) %>

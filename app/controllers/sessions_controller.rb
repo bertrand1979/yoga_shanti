@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   def create
     @session = @lesson.sessions.build(session_params)
     if @session.save
-    redirect_to user_lesson_session_path(@user)
+    redirect_to user_lesson_sessions_path
     else
       render :new
     end
@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
 
   def update
     if @session.update(session_params)
-      redirect_to user_lesson_session_path(@user)
+      redirect_to user_lesson_sessions_path(@user)
     else
       render :new
     end
