@@ -6,9 +6,11 @@
 
   <%= f.input :name %>
   <%= f.input :address %>
-  <%= f.input :price %>
-  <%= f.input :picture1 %>
+  <%= f.input :price, collection: 1..100 %>
+  <%= f.input :description %>
+  <%= f.input :yoga_category, collection: ["Hatha", "Vinyasa", "Asthanga", "Jivamukti", "Iyengar", "Bikram", "Hot yoga", "Yin yoga", "Acroyoga"] %>
+  <%= f.input :photos, as: :attachinary %>
 
-<%= f.button :submit %>
+<%= f.button :submit,'Update this class' %>
 
  <% end %>

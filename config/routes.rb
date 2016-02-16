@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:index]
 
-
+  mount Attachinary::Engine => "/attachinary"
 
 
 
