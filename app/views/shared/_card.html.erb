@@ -5,6 +5,7 @@
     <p><%= session.lesson.price %></p>
     <p><%= session.conf_status %></p>
   </div>
-  <img class="card-user avatar" src="user.jpg">
-  <%= link_to "HELLo", sessions_path, :class => "card-link" %>
+
+  <img class="card-user avatar" src="<%= cl_image_path session.lesson.user.picture %>">
+  <%= link_to "", sessions_path, :class => "card-link" %>
 </div>
