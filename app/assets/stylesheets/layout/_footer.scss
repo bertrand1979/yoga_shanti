@@ -1,12 +1,15 @@
 // Your footer style
 #footer{
   margin-top:100px;
+  padding:30px;
+  color:$gray-lighter;
  a{
-    color: orange;
+    color: $orange;
   };
   a:hover{
     color:#D18600
   }
+  background: $gray-dark;
 
 }
 
