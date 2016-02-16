@@ -1,6 +1,5 @@
 class LessonsController < ApplicationController
 before_action :find_user, only: [:new, :edit, :update, :create]
->>>>>>> master
 
   def index
     @lessons = Lesson.all

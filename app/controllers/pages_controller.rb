@@ -3,6 +3,5 @@ class PagesController < ApplicationController
 
   def home
     @sessions = Session.all
-    @lessons = Lesson.all
   end
 end
