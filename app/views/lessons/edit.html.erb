@@ -1,0 +1,12 @@
+
+<h1>Edit your class</h1>
+
+  <%= simple_form_for [@user, @lesson] do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :price %>
+
+
+ <% end %>
