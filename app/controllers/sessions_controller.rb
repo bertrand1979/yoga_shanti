@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :find_lesson, only: [ :new, :create ]
+  before_action :find_lesson, only: [ :new, :create, :show, :update, :destroy ]
 
   def index
     @sessions = Session.all
@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
   def create
     @session = @lesson.sessions.build(review_params)
     @session.save
+    redirect_to user_lesson_session_path(@session)
   end
 
   def edit
@@ -23,7 +24,7 @@ class SessionsController < ApplicationController
 
   def update
     if @session.update(lesson_params)
-      redirect_to session_path(@session)
+      redirect_to user_lesson_session_path(@session)
     else
       render :new
     end
@@ -44,16 +45,3 @@ class SessionsController < ApplicationController
   end
 
 end
-
-
-
-
-
-    user_lesson_sessions GET    /users/:user_id/lessons/:lesson_id/sessions(.:format)          sessions#index
-                         POST   /users/:user_id/lessons/:lesson_id/sessions(.:format)          sessions#create
- new_user_lesson_session GET    /users/:user_id/lessons/:lesson_id/sessions/new(.:format)      sessions#new
-edit_user_lesson_session GET    /users/:user_id/lessons/:lesson_id/sessions/:id/edit(.:format) sessions#edit
-     user_lesson_session GET    /users/:user_id/lessons/:lesson_id/sessions/:id(.:format)      sessions#show
-                         PATCH  /users/:user_id/lessons/:lesson_id/sessions/:id(.:format)      sessions#update
-                         PUT    /users/:user_id/lessons/:lesson_id/sessions/:id(.:format)      sessions#update
-                         DELETE /users/:user_id/lessons/:lesson_id/sessions/:id(.:format)      sessions#destroy

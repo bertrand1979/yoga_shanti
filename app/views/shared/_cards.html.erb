@@ -1,39 +1,17 @@
 <div class="container padded">
   <div class="row">
-    <div class="col-xs-12 col-sm-4">
-      <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
-        <div class="card-category">Location</div>
-        <div class="card-description">
-          <h2>Class Title</h2>
-          <p>Class Tagline</p>
+    <% @sessions.each do |session| %>
+      <div class="col-xs-12 col-sm-4">
+        <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('session.lesson.picture1.jpg');">
+          <div class="card-category"><%= session.lesson.location %></div>
+          <div class="card-description">
+            <h2><%= session.lesson.name %></h2>
+            <p><%= session.lesson.yoga_category %><</p>
+          </div>
+          <%= image_tag "session.lesson.user_id.png", {class: "card-user avatar"}%>
+          <a class="card-link" href="#" ></a>
         </div>
-        <img class="card-user avatar" src="user.jpg">
-        <a class="card-link" href="#" ></a>
       </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
-        <div class="card-category">Location</div>
-        <div class="card-description">
-          <h2>Class Title</h2>
-          <p>Class Tagline</p>
-        </div>
-        <img class="card-user avatar" src="user.jpg">
-        <a class="card-link" href="#" ></a>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
-        <div class="card-category">Location</div>
-        <div class="card-description">
-          <h2>Class Title</h2>
-          <p>Class Tagline</p>
-        </div>
-        <img class="card-user avatar" src="user.jpg">
-        <a class="card-link" href="#" ></a>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
