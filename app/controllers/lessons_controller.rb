@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-before_action :find_user, except: [ :new, :edit, :update, :create]
+before_action :find_user, only: [:new, :edit, :update, :create]
 
   def index
     @lessons = Lesson.all
@@ -22,6 +22,7 @@ before_action :find_user, except: [ :new, :edit, :update, :create]
   end
 
   def update
+    @lesson = Lesson.find(params[:id])
     if @lesson.update(lesson_params)
       redirect_to user_lessons_path(@user)
     else render :new

@@ -1,7 +1,9 @@
 <p>All classes available</p>
 <ul>
   <%@lessons.each do |lesson|%>
-  <li><%=lesson.name + " -" + lesson.address%></li><%= link_to "Edit this class", edit_user_lesson_path(lesson.user, lesson)%>
+  <li><%=link_to "#{lesson.name}", user_lesson_path(lesson.user, lesson)%><br>
+    <%= lesson.address + " | "%><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit'.html_safe, edit_user_lesson_path(lesson.user, lesson)%><br>
+    </li>
   <%end%>
 </ul>
 <%= link_to("Add a new class", new_user_lesson_path)%>
