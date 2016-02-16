@@ -1,8 +1,19 @@
-
-
-
 <%= render "banner"%>
-<%= render "shared/cards"%>
+<div class="container padded">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <div class="row">
+        <% @sessions.each do |session| %>
+          <div class="col-xs-12 col-sm-4">
+            <%= render "shared/cards", session: session%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 
 
