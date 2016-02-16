@@ -42,7 +42,7 @@ before_action :find_user, only: [:new, :edit, :update, :create]
   private
 
   def lesson_params
-  params.require(:lesson).permit(:name, :address, :price, :picture1)
+  params.require(:lesson).permit(:name, :address, :price, photos: [])
   end
 
   def find_user

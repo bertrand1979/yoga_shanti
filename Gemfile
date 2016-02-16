@@ -17,6 +17,10 @@ gem 'simple_form'
 gem 'autoprefixer-rails'
 gem 'devise'
 gem 'omniauth-facebook'
+gem "cloudinary"
+gem "attachinary"
+gem "jquery-fileupload-rails"
+gem "coffee-rails"
 
 group :development, :test do
   gem 'binding_of_caller'

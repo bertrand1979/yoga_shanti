@@ -1,5 +1,6 @@
 class Lesson < ActiveRecord::Base
   belongs_to :user
   has_many :sessions, dependent: :destroy
-  validates :name, :address, :price, :picture1, presence: true
+  has_attachments :photos, maximum: 3
+  validates :name, :address, :price, presence: true
 end
