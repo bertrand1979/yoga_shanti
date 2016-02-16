@@ -10,8 +10,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 20160215175758) do
+ActiveRecord::Schema.define(version: 20160216091155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +31,19 @@ ActiveRecord::Schema.define(version: 20160215175758) do
   end
 
   add_index "lessons", ["user_id"], name: "index_lessons_on_user_id", using: :btree
+
+
+  create_table "sessions", force: :cascade do |t|
+    t.boolean  "conf_status"
+    t.date     "starts_at"
+    t.integer  "user_id"
+    t.integer  "lesson_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "sessions", ["lesson_id"], name: "index_sessions_on_lesson_id", using: :btree
+  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -58,4 +70,7 @@ ActiveRecord::Schema.define(version: 20160215175758) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "lessons", "users"
+  add_foreign_key "sessions", "lessons"
+  add_foreign_key "sessions", "users"
+
 end
