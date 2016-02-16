@@ -2,12 +2,7 @@
   <div class="banner-content">
     <h1>Become a master of yoga</h1>
     <p>Meet the best yoga teacher and level up your game</p>
-    <a class="btn btn-primary btn-lg">Find a class</a>
-  </div>
-</div>
-
-<div class="container padded text-center">
-  <form class="form-inline">
+    <form class="form-inline">
       <div class="form-group">
         <label for="Where?">Where?</label>
         <input type="text" class="form-control navbar-wagon-search-input" id="Where?" placeholder="16 villa Gaudelet, Paris">
@@ -18,50 +13,13 @@
         <input type="date" class="navbar-wagon-search-input form-control" id="Date" placeholder="Date">
       </div>
 
-      <button type="submit" class="btn btn-success">Search</button>
-
+      <button type="submit" class="btn btn-success">Find a class</button>
   </form>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-4">
-      <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
-        <div class="card-category">Location</div>
-        <div class="card-description">
-          <h2>Class Title</h2>
-          <p>Class Tagline</p>
-        </div>
-        <img class="card-user avatar" src="user.jpg">
-        <a class="card-link" href="#" ></a>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
-        <div class="card-category">Location</div>
-        <div class="card-description">
-          <h2>Class Title</h2>
-          <p>Class Tagline</p>
-        </div>
-        <img class="card-user avatar" src="user.jpg">
-        <a class="card-link" href="#" ></a>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-4">
-      <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
-        <div class="card-category">Location</div>
-        <div class="card-description">
-          <h2>Class Title</h2>
-          <p>Class Tagline</p>
-        </div>
-        <img class="card-user avatar" src="user.jpg">
-        <a class="card-link" href="#" ></a>
-      </div>
-    </div>
   </div>
 </div>
+
+<%= render "shared/cards"%>
+
 
 
 
