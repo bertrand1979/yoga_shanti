@@ -4,7 +4,7 @@
   <%= simple_form_for(@lesson) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :name %>
+  <%= f.input :name, :input_html => {:maxlength => 15, :size => 40} %>
   <%= f.input :address,:input_html => { :id => "user_input_autocomplete_address"} %>
   <%= f.input :price, collection: 1..100 %>
   <%= f.input :description %>
