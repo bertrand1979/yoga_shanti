@@ -1,5 +1,5 @@
 <%= render "shared/banner_small", text:"Dashboard",text2:"", picture: 'http://www.findhealthtips.com/wp-content/uploads/2015/06/yoga-classes.jpg'%>
-<div class="small-padded"></div>
+<div class="padded"></div>
 
 
 <div class="container text-center">
@@ -39,30 +39,30 @@
         <%end%>
         </li>
       <%end%>
-      <li>
-        <div class="small-padded"></div>
-        <%=link_to "Create a new class", new_lesson_path, class:"btn btn-primary"%>
-      </li>
+      <% if current_user.id == @user.id %>
+        <li>
+          <div class="small-padded"></div>
+          <%=link_to "Create a new class", new_lesson_path, class:"btn btn-primary"%>
+        </li>
+      <%end%>
     </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-    <div class="padded"></div>
-    <h2>The classes I booked</h2>
-    <div class="small-padded"></div>
-      <div class="row">
-        <% current_user.sessions.each do |session| %>
-          <div class="col-xs-12 col-sm-4">
-            <%= render "shared/card", session: session%>
-          </div>
-        <% end %>
+  <% if current_user.id == @user.id %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <div class="padded"></div>
+      <h2>The classes I booked</h2>
+      <div class="small-padded"></div>
+        <div class="row">
+          <% current_user.sessions.each do |session| %>
+            <div class="col-xs-12 col-sm-4">
+              <%= render "shared/card", session: session%>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-
-  </div>
-
-
-
+  <%end%>
 </div>
 
