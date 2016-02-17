@@ -1,2 +1,5 @@
 <h1>Edit the date of your lesson:</h1>
-<%= render "_form"%>
+<%= simple_form_for [@lesson, @session] do |f| %>
+  <%= f.input :starts_at %>
+  <%= f.submit "Save" %>
+<% end %>
