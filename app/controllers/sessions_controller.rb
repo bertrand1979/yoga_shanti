@@ -29,7 +29,8 @@ class SessionsController < ApplicationController
   def update
     @session = Session.find(params[:id])
     if @session.update(session_params)
-      redirect_to lesson_path(@session.lesson)
+      redirect_to session_path(@session.lesson)
+
     else
       render :new
     end
@@ -44,7 +45,7 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:starts_at)
+    params.require(:session).permit(:starts_at, :conf_status)
   end
 
   def find_lesson
