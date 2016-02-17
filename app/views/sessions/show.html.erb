@@ -1,18 +1,25 @@
-<h2><%= @session.lesson.name %></h2>
-<p><%= @session.lesson.address %></p>
-<p><%= @session.lesson.description %></p>
-<p><%= @session.starts_at %></p>
-  <% if @session.conf_status == false %>
-  <p>1 seat available</p>
-  <%= simple_form_for @session do |f| %>
-  <%= f.input :conf_status, label: 'Book the class' %>
-  <%= f.button :submit, label: 'Book' %>
-<% end %>
-  <% else %>
-  <p>0 seat available, sorry!</p>
-  <% end %>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <h2><%= @session.lesson.name %></h2>
+      <p><%= @session.lesson.address %></p>
+      <p><%= @session.lesson.description %></p>
+      <p><%= @session.starts_at %></p>
+        <% if @session.conf_status == false %>
+        <p>1 seat available</p>
+        <%= simple_form_for @session do |f| %>
+        <%= f.input :conf_status, label: 'Book the class' %>
+        <%= f.button :submit, label: 'Book' %>
+      <% end %>
+        <% else %>
+        <p>0 seat available, sorry!</p>
+        <% end %>
 
-<p><% @session.lesson.photos.each do |photo| %>
-  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-<% end %></p>
+      <p><% @session.lesson.photos.each do |photo| %>
+        <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+      <% end %></p>
+
+    </div>
+  </div>
+</div>
 
