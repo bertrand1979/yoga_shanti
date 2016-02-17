@@ -1,5 +1,18 @@
 // Your footer style
-.social {
-  color: orange;
+#footer{
+  margin-top:100px;
+  padding:30px;
+  color:$gray-lighter;
+  background: $gray-dark;
+ a{
+    color: $greenish;
+  };
+  a:hover{
+    color:$brownish;
+  };
+  .container{
+    padding:10px;
+  }
+
 }
 
