@@ -18,9 +18,10 @@ class LessonsController < ApplicationController
   end
 
   def create
-    @lesson = @user.lessons.build(lesson_params)
+    @lesson = Lesson.new(lesson_params)
+    @lesson.user = current_user
     if @lesson.save
-    redirect_to user_lesson_path(@user, @lesson)
+    redirect_to lesson_path(@lesson)
     else render :new
     end
   end
@@ -28,7 +29,7 @@ class LessonsController < ApplicationController
   def update
     @lesson = Lesson.find(params[:id])
     if @lesson.update(lesson_params)
-      redirect_to user_lessons_path(@user)
+      redirect_to lessons_path
     else render :new
     end
   end

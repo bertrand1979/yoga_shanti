@@ -15,7 +15,7 @@
         <li> <h4><%=session.starts_at%></h4> </li>
         <%end%>
       </ul>
-      <%= link_to 'Add a session', new_user_lesson_session_path(@lesson.user, @lesson), class:"btn btn-primary" %>
+      <%= link_to 'Add a session', new_lesson_session_path(@lesson), class:"btn btn-primary" %>
     </div>
   </div>
   <div class="row">
@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-<%= link_to 'Back to list', user_lessons_path(@lesson.user_id) %>
+<%= link_to 'Back to list', lessons_path %>
 
 </div>
 

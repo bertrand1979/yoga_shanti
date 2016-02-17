@@ -1,5 +1,5 @@
-<% @teacher = User.find(params[:user_id])%>
-<p>All classes available for <%= @teacher.first_name%></p>
+<%# @teacher = User.find(params[:user_id])%>
+<!-- <p>All classes available for <%#=@teacher.first_name%></p> -->
 
 <ul>
   <%@lessons.each do |lesson|%>
