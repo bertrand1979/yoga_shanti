@@ -4,8 +4,11 @@
     <h2><%= session.lesson.name %></h2>
     <p><%= session.lesson.price %> Euros</p>
     <p>Date - <%= session.starts_at %></p>
-    <p><%= session.conf_status %></p>
+    <% if session.conf_status==false %>
+    <p>Book now</p>
+    <% else %>
+    <p>Class full</p>
+    <%end%>
   </div>
-
   <%= link_to "", session_path(session), :class => "card-link" %>
 </div>
