@@ -1,9 +1,42 @@
-<h2><%= @lesson.name %></h2>
-<p><%= @lesson.address %></p>
-<p><%= @lesson.description %></p>
-<p><% @lesson.photos.each do |photo| %>
-  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-<% end %></p>
-<%= link_to 'Add a session', new_user_lesson_session_path(@lesson.user, @lesson) %>
+<%= render "shared/banner_small", text:"",text2:"", picture: 'http://www.findhealthtips.com/wp-content/uploads/2015/06/yoga-classes.jpg'%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+      <h2> Lesson </h2>
+      <h3><%= @lesson.name %></h3>
+      <p><%= @lesson.address %></p>
+      <p><%= @lesson.description %></p>
+    </div>
+    <div class="col-xs-12 col-sm-5 col-sm-offset-1 text-center">
+      <h2>Dates planned</h2>
+      <ul class="list-unstyled">
+        <% @lesson.sessions.each do |session| %>
+        <li> <h4><%=session.starts_at%></h4> </li>
+        <%end%>
+      </ul>
+      <%= link_to 'Add a session', new_user_lesson_session_path(@lesson.user, @lesson), class:"btn btn-primary" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <div class="small-padded"></div>
+          <h2>Lesson's pictures</h2>
+          <div class="small-padded"></div>
+        </div>
+        <% @lesson.photos.each do |photo| %>
+          <div class="col-xs-12 col-sm-4">
+            <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <%= link_to 'Back to list', user_lessons_path(@lesson.user_id) %>
+
+</div>
+
+
 
