@@ -1,10 +1,26 @@
 <% @teacher = User.find(params[:user_id])%>
 <p>All classes available for <%= @teacher.first_name%></p>
+
 <ul>
   <%@lessons.each do |lesson|%>
   <li><%=link_to "#{lesson.name}", user_lesson_path(lesson.user, lesson)%><br>
     <%= lesson.address + " | "%><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit'.html_safe, edit_user_lesson_path(lesson.user, lesson)%><br>
     </li>
   <%end%>
+  <div id="map" style="width: 40%; height: 300px;"></div>
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js" %>
+  <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" %>
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).on('ready', function() {
+      handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function(){
+        markers = handler.addMarkers(<%= raw @markers.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+    })
+  <% end %>
+<% end %>
 </ul>
 <%= link_to("Add a new class", new_user_lesson_path)%>
