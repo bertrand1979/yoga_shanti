@@ -4,6 +4,13 @@
 <p><% @lesson.photos.each do |photo| %>
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %></p>
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      alert('<%= j @alert_message %>');
+    });
+  <% end %>
+<% end %>
 <%= link_to 'Add a session', new_user_lesson_session_path(@lesson.user, @lesson) %>
 <%= link_to 'Back to list', user_lessons_path(@lesson.user_id) %>
 

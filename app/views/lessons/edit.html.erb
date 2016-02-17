@@ -5,7 +5,7 @@
   <%= f.error_notification %>
 
   <%= f.input :name %>
-  <%= f.input :address %>
+  <%= f.input :address,:input_html => { :id => "user_input_autocomplete_address"} %>
   <%= f.input :price, collection: 1..100 %>
   <%= f.input :description %>
   <%= f.input :yoga_category, collection: ["Hatha", "Vinyasa", "Asthanga", "Jivamukti", "Iyengar", "Bikram", "Hot yoga", "Yin yoga", "Acroyoga"] %>
@@ -14,3 +14,16 @@
 <%= f.button :submit,'Update this class' %>
 
  <% end %>
+
+<!-- Include Google Maps JS API -->
+<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAeNsutHdohOVTLJjZLhkYc_DgVCZqWaB8">
+</script>
+
+<!-- Custom JS code to bind to Autocomplete API -->
+<!-- find it here: https://github.com/lewagon/google-place-autocomplete/blob/gh-pages/autocomplete.js -->
+<!-- We'll detail this file in the article -->
+
+
+    <!-- Custom JS code to bind to Autocomplete API -->
+    <% javascript_include_tag 'autocomplete' %>
