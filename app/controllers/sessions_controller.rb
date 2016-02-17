@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :find_lesson, only: [ :new, :create, :update, :destroy, :edit ]
+  before_action :find_lesson, only: [ :new, :create, :destroy ]
 
   def index
     @sessions = Session.all
@@ -26,8 +26,9 @@ class SessionsController < ApplicationController
   end
 
   def update
+    @session = Session.find(params[:id])
     if @session.update(session_params)
-      redirect_to user_lesson_sessions_path(@user)
+      redirect_to session_path(@session.lesson)
     else
       render :new
     end
@@ -42,7 +43,7 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:starts_at)
+    params.require(:session).permit(:starts_at, :conf_status)
   end
 
   def find_lesson
