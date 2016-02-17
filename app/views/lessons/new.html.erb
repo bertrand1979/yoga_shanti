@@ -1,6 +1,5 @@
-<h1>Add a new class</h1>
-
-  <%= simple_form_for([@user, @lesson]) do |f| %>
+<%= render "shared/banner_small", text:"Add a new class",text2:"And start teaching now", picture: 'http://www.findhealthtips.com/wp-content/uploads/2015/06/yoga-classes.jpg'%>
+<%= simple_form_for([@user, @lesson]) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :name, placeholder: "Label your class. Ex : Vinyasa 90 mn" %>
