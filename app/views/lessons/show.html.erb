@@ -5,5 +5,5 @@
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %></p>
 <%= link_to 'Add a session', new_user_lesson_session_path(@lesson.user, @lesson) %>
-<%= link_to 'Back to list', user_lessons_path(@lesson) %>
+<%= link_to 'Back to list', user_lessons_path(@lesson.user_id) %>
 
