@@ -1,6 +1,6 @@
 <h1>Add a new class</h1>
 
-  <%= simple_form_for([@user, @lesson]) do |f| %>
+  <%= simple_form_for(@lesson) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :name, placeholder: "Label your class. Ex : Vinyasa 90 mn" %>

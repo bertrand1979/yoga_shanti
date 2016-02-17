@@ -1,13 +1,9 @@
-<h1>List of my offered sessions</h1>
+<h1>List of all sessions</h1>
 <% @sessions.each do |session| %>
-  <h2><%= session.starts_at %></h2>
-  <p><%= session.lesson.name %></p>
-  <p><%= session.lesson.location %></p>
-  <p><%= session.lesson.description %></p>
-  <p><%= session.lesson.address %></p>
-  <p><%= session.lesson.yoga_category %></p>
-  <p><%= session.lesson.picture1 %></p>
-  <p><%= session.lesson.price %></p>
-  <p><%= session.lesson.user_id %></p>
+  <h2>Date: <%= session.starts_at %></h2>
+  <p>Lesson: <%= session.lesson.name %></p>
+  <p>Address: <%= session.lesson.address %></p>
+  <p>My user_id: <%= session.lesson.user_id %></p>
+  <%= link_to 'See the session', session_path(session) %>
 <% end %>
 

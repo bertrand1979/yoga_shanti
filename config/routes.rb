@@ -3,16 +3,23 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  resources :users, only: [:show, :edit, :update] do
-    resources :lessons do
-      resources :sessions
-    end
-    resources :events, only: [:index, :show]
-  end
+  resources :users, only: [:show, :edit, :update]
 
-  resources :sessions, only: [:index]
+  resources :lessons do
+    resources :sessions, only: [:new, :create]
+  end
+  resources :sessions, except: [:new, :create]
 
   mount Attachinary::Engine => "/attachinary"
+
+
+# Rails.application.routes.draw do
+#   resources :restaurants do
+#     collection do                       # collection => no restaurant id in URL
+#       get 'top', to: "restaurants#top"  # RestaurantsController#top
+#     end
+#   end
+# end
 
 
 

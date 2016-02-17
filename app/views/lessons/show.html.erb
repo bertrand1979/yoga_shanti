@@ -4,6 +4,9 @@
 <p><% @lesson.photos.each do |photo| %>
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %></p>
-<%= link_to 'Add a session', new_user_lesson_session_path(@lesson.user, @lesson) %>
-<%= link_to 'Back to list', user_lessons_path(@lesson) %>
-
+<h2>List of sessions for this lesson</h2>
+<p><% @sessions.each do |session|%></p>
+<p><%= session.starts_at %></p>
+<% end %>
+<%= link_to 'Add a session', new_lesson_session_path(@lesson) %>
+<%= link_to 'Back to list', lessons_path(@lesson) %>

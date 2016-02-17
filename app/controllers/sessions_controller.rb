@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :find_lesson, :find_user, only: [ :new, :create, :show, :update, :destroy, :edit, :update ]
+  before_action :find_lesson, only: [ :new, :create, :update, :destroy, :edit ]
 
   def index
     @sessions = Session.all
@@ -47,9 +47,6 @@ class SessionsController < ApplicationController
 
   def find_lesson
     @lesson = Lesson.find(params[:lesson_id])
-  end
-  def find_user
-    @user = User.find(params[:user_id])
   end
 
 end
