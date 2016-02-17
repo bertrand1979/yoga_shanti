@@ -2,7 +2,7 @@ class LessonsController < ApplicationController
 before_action :find_user, only: [:new, :edit, :update, :create]
 
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson.where(user_id: params[:user_id])
   end
 
   def show
