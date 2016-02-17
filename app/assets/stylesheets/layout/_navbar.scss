@@ -51,18 +51,18 @@
 /* Navbar right button */
 .navbar-wagon-button {
   margin-left: 10px;
-  padding: 0 20px;
-  border-radius: 20em;
-  line-height: 40px;
+  padding: 0 15px;
+  border-radius: 2em;
+  line-height: 35px;
   background-color: $greenish;
   color: white;
   font-size: 14px;
-  border: 2px solid #6A8783;
+  border: 2px solid $blueish;
 }
 .navbar-wagon-button:hover {
   color: white;
-  background: #6A8783;
-  border-color: #6A8783;
+  background: $blueish;
+  border-color: $blueish;
 }
 
 /* Navbar search form */

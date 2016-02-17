@@ -16,7 +16,7 @@ before_action :find_user, only: [:new, :edit, :update, :create]
   def create
     @lesson = @user.lessons.build(lesson_params)
     if @lesson.save
-    redirect_to user_lessons_path(@user)
+    redirect_to user_lesson_path(@user, @lesson)
     else render :new
     end
   end
