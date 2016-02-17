@@ -3,8 +3,8 @@
 
 <ul>
   <%@lessons.each do |lesson|%>
-  <li><%=link_to "#{lesson.name}", user_lesson_path(lesson.user, lesson)%><br>
-    <%= lesson.address + " | "%><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit'.html_safe, edit_user_lesson_path(lesson.user, lesson)%><br>
+  <li><%=link_to "#{lesson.name}", lesson_path(lesson)%><br>
+    <%= lesson.address + " | "%><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit'.html_safe, edit_lesson_path(lesson)%><br>
     </li>
   <%end%>
   <div id="map" style="width: 40%; height: 300px;"></div>
@@ -23,4 +23,5 @@
   <% end %>
 <% end %>
 </ul>
-<%= link_to("Add a new class", new_user_lesson_path)%>
+<%= link_to("Add a new class", new_lesson_path)%>
+

@@ -1,7 +1,7 @@
 
 <h1>Edit your class</h1>
 
-  <%= simple_form_for [@user, @lesson] do |f| %>
+  <%= simple_form_for(@lesson) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :name %>

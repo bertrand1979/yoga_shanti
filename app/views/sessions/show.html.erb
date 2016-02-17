@@ -1,0 +1,8 @@
+<h2><%= @session.lesson.name %></h2>
+<p><%= @session.lesson.address %></p>
+<p><%= @session.lesson.description %></p>
+<p><%= @session.starts_at %></p>
+<p><% @session.lesson.photos.each do |photo| %>
+  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+<% end %></p>
+
