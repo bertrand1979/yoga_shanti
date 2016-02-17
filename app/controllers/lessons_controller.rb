@@ -1,12 +1,16 @@
 class LessonsController < ApplicationController
-before_action :find_user, only: [:new, :edit, :update, :create]
 
   def index
-    @lessons = Lesson.where(user_id: params[:user_id])
+    @lessons = Lesson.all
+    @markers = Gmaps4rails.build_markers(@lessons) do |lesson, marker|
+      marker.lat lesson.latitude
+      marker.lng lesson.longitude
+      end
   end
 
   def show
     @lesson = Lesson.find(params[:id])
+    @sessions = @lesson.sessions
   end
 
  def new
@@ -43,10 +47,6 @@ before_action :find_user, only: [:new, :edit, :update, :create]
 
   def lesson_params
   params.require(:lesson).permit(:name, :address, :price, photos: [])
-  end
-
-  def find_user
-    @user = User.find(params[:user_id])
   end
 
 end
