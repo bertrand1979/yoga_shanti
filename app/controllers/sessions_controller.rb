@@ -30,7 +30,6 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
     if @session.update(session_params)
       redirect_to session_path(@session.lesson)
-
     else
       render :new
     end
