@@ -5,9 +5,9 @@
     <p><%= session.lesson.price %> Euros</p>
     <p>Date - <%= session.starts_at %></p>
     <% if session.conf_status==false %>
-    <p>Book now</p>
+    <p id="card-non-booked">Book now</p>
     <% else %>
-    <p>Class full</p>
+    <p id="card-booked">Class full</p>
     <%end%>
   </div>
   <%= link_to "", session_path(session), :class => "card-link" %>

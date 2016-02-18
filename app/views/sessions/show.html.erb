@@ -13,12 +13,14 @@
         <% if @session.conf_status == false %>
         <p>Availability: 1 seat available</p>
         <%= simple_form_for @session do |f| %>
-        <%= f.input :conf_status, label: 'Check the box to book this class and confirm'%>
-        <%= f.submit 'Confirm', class: 'btn-success' %>
+        <%= f.input :conf_status, :as => :hidden, input_html: { value: true } %>
+        <%= f.input :user_id, :as => :hidden, input_html: { value: current_user.id } %>
+        <%= f.submit 'Book the class', class: 'btn-success', style: "width: 90%"%>
       <% end %>
         <% else %>
         <p>Availability: 0 seat available, sorry, try another class!</p>
-        <p>User registered: <%= @session.user_id %></p>
+        <% user_reg = User.find(@session.user_id) %>
+        <p>User registered: <%= user_reg.first_name %> <%= user_reg.last_name %></p>
         <%= link_to('Classes list', root_path, class: 'btn btn-primary') %>
         <% end %>
     </div>
