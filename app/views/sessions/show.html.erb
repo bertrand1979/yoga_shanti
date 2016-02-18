@@ -16,6 +16,17 @@
             <%= f.input :conf_status, :as => :hidden, input_html: { value: true } %>
             <%= f.input :user_id, :as => :hidden, input_html: { value: current_user.id } %>
             <%= f.submit 'Book the class', class: 'btn btn-success', style: "width: 90%"%>
+            <% sessions = Session.all %>
+            <% id_array = [] %>
+            <% sessions.each do |session| %>
+            <% id_array << session.id %>
+            <% end %>
+            <% id_sample = id_array.shuffle.sample %>
+            <%= link_to('See another class', session_path(id: id_sample), class: 'btn btn-info', style: "width: 90%") %>
+
+
+
+            <%= link_to('Back to list of classes', root_path, class: 'btn btn-primary', style: "width: 90%") %>
             <% end %>
         <% else %>
           <p id="red">Availability: 0 seat available, sorry, try another class!</p>
