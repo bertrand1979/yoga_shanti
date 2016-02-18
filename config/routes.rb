@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   mount Attachinary::Engine => "/attachinary"
 
 
+
 # Rails.application.routes.draw do
 #   resources :restaurants do
 #     collection do                       # collection => no restaurant id in URL

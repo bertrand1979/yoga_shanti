@@ -20,14 +20,29 @@
   <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" %>
   <% content_for(:after_js) do %>
   <%= javascript_tag do %>
+
+  var myStyle = [{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef "}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff "},{"color":"#c0e8e8 "}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd "}]}];
+
     $(document).on('ready', function() {
-      handler = Gmaps.build('Google');
-      handler.buildMap({internal: { id: 'map' } }, function(){
-        markers = handler.addMarkers(<%= raw @markers.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-      });
-    })
+     var handler = Gmaps.build('Google');
+     handler.buildMap({ internal: { id: 'map' }, provider: { styles: myStyle } }, function(){
+       markers = handler.addMarkers(<%= raw @markers.to_json %>);
+       console.log(markers);
+       handler.bounds.extendWith(markers);
+       handler.fitMapToBounds();
+     });
+
+     <!-- infowindow on mouseover -->
+     google.maps.event.addListener(Marker, 'mouseover', function() {
+     console.log('hello');
+         infowindow.open(map, this);
+     });
+
+     // assuming you also want to hide the infowindow when user mouses-out
+     google.maps.event.addListener(marker, 'mouseout', function() {
+         infowindow.close();
+     });
+   });
   <% end %>
 <% end %>
 

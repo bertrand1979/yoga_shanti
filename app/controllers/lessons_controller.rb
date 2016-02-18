@@ -3,8 +3,15 @@ class LessonsController < ApplicationController
   def index
     @lessons = Lesson.all
     @markers = Gmaps4rails.build_markers(@lessons) do |lesson, marker|
+      @lesson = lesson
       marker.lat lesson.latitude
       marker.lng lesson.longitude
+      marker.infowindow render_to_string(:partial => "lessons/infowindow", :locals => { :lesson => @lesson})
+      # marker.title "#{lesson.name}"
+      # marker.json({ :address => lesson.address})
+      marker.picture({:picture => "/assets/images/yoga.png",
+                     :width => 32,
+                     :height => 32})
     end
   end
 
