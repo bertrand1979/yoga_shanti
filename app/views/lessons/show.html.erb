@@ -15,7 +15,10 @@
         <li> <h4><%=session.starts_at%></h4> </li>
         <%end%>
       </ul>
-      <%= link_to 'Add a session', new_lesson_session_path(@lesson), class:"btn btn-primary" %>
+      <%= simple_form_for [@lesson, @session] do |f| %>
+        <%= f.text_field :starts_at, label:false, placeholder:"Add a session", class:"text-center" %>
+        <%= f.submit "Ok" %>
+      <% end %>
     </div>
   </div>
   <div class="row">
@@ -38,4 +41,10 @@
 
 </div>
 
+<% content_for :after_js do %>
+  <%=javascript_tag do %>
+    $('#session_starts_at').datepicker({
+    });
+  <%end%>
+<%end%>
 
