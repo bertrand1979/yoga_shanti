@@ -67,21 +67,25 @@
     <%end%>
     </div>
   </div>
-  <% if current_user.id == @user.id %>
-    <div class="row">
-      <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-      <div class="padded"></div>
-      <h2>The classes I booked</h2>
-      <div class="small-padded"></div>
-        <div class="row">
-          <% current_user.sessions.each do |session| %>
+</div>
+
+<div class="container">
+  <div class="row text-center padded">
+  <h2>The classes I booked</h2>
+  </div>
+  <div class="row">
+    <div class="small-padded"></div>
+      <% sessions = Session.all %>
+      <% sessions.each do |session| %>
+        <% if session.user_id == current_user.id %>
             <div class="col-xs-12 col-sm-4">
-              <%= render "shared/card", session: session%>
+            <%= render "shared/card", session: session%>
             </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <%end%>
+        <% end %>
+      <% end %>
+  </div>
+</div>
+
+
 </div>
 

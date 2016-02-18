@@ -29,7 +29,11 @@ class SessionsController < ApplicationController
   def update
     @session = Session.find(params[:id])
     if @session.update(session_params)
-      redirect_to session_path(@session), notice: "Session booked!"
+      if @session.conf_status == true
+      redirect_to session_path(@session), notice: "Congratulations, session booked, happy Yoga!"
+      else
+      redirect_to session_path(@session), alert: "Session unbooked, we hope to see you soon!"
+      end
     else
       render :new
     end

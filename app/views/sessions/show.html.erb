@@ -11,17 +11,22 @@
       <p>Category: <%= @session.lesson.yoga_category %></p>
       <p>Date: <%= @session.starts_at %></p>
         <% if @session.conf_status == false %>
-        <p>Availability: 1 seat available</p>
-        <%= simple_form_for @session do |f| %>
-        <%= f.input :conf_status, :as => :hidden, input_html: { value: true } %>
-        <%= f.input :user_id, :as => :hidden, input_html: { value: current_user.id } %>
-        <%= f.submit 'Book the class', class: 'btn-success', style: "width: 90%"%>
-      <% end %>
+          <p id="green">Availability: 1 seat available</p>
+            <%= simple_form_for @session do |f| %>
+            <%= f.input :conf_status, :as => :hidden, input_html: { value: true } %>
+            <%= f.input :user_id, :as => :hidden, input_html: { value: current_user.id } %>
+            <%= f.submit 'Book the class', class: 'btn btn-success', style: "width: 90%"%>
+            <% end %>
         <% else %>
-        <p>Availability: 0 seat available, sorry, try another class!</p>
-        <% user_reg = User.find(@session.user_id) %>
-        <p>User registered: <%= user_reg.first_name %> <%= user_reg.last_name %></p>
-        <%= link_to('Classes list', root_path, class: 'btn btn-primary') %>
+          <p id="red">Availability: 0 seat available, sorry, try another class!</p>
+          <% user_reg = User.find(@session.user_id) %>
+          <p>Person registered: <%= user_reg.first_name %> <%= user_reg.last_name %></p>
+          <%= link_to('Back to list', root_path, class: 'btn btn-primary', style: "width: 90%") %>
+            <%= simple_form_for @session do |f| %>
+            <%= f.input :conf_status, :as => :hidden, input_html: { value: false } %>
+            <%= f.input :user_id, :as => :hidden, input_html: { value: nil } %>
+            <%= f.submit 'Unbook the class', class: 'btn btn-danger', style: "width: 90%"%>
+            <% end %>
         <% end %>
     </div>
   </div>
