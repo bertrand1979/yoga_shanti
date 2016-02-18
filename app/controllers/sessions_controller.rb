@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :find_lesson, only: [ :new, :create, :destroy ]
+  before_action :find_lesson, only: [ :new, :create]
 
   def index
     @sessions = Session.all
@@ -37,8 +37,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    @session = Session.find(params[:id])
     @session.destroy
-    redirect_to user_lesson_session_path(@user)
+    redirect_to :back
   end
 
 

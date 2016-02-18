@@ -13,6 +13,7 @@
       <ul class="list-unstyled">
         <% @lesson.sessions.each do |session| %>
         <li> <h4><%=session.starts_at%></h4> </li>
+        <li><%= link_to "Cancel session", session_path(session), method:"delete"%></li>
         <%end%>
       </ul>
       <%= simple_form_for [@lesson, @session] do |f| %>
