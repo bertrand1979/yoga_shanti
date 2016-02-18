@@ -1,4 +1,4 @@
-<div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path session.lesson.photos.first&.path%>);">
+<div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path(session.lesson.photos.first&.path)%>);">
   <div class="card-category">Teacher - <%= session.lesson.user.first_name %></div>
   <div class="card-description">
     <h2><%= session.lesson.name %></h2>
