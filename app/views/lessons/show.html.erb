@@ -2,19 +2,31 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-5 col-sm-offset-1">
-      <h2> Lesson </h2>
-      <h3><%= @lesson.name %></h3>
-      <p><%= @lesson.address %></p>
-      <p><%= @lesson.description %></p>
-      <p><%= @lesson.yoga_category %></p>
+    <div class="title">
+    <h3><%= @lesson.name %><%= link_to ' <i class="fa fa-pencil-square-o"></i> Edit'.html_safe, edit_lesson_path(@lesson), html_options={:class=>"small-icons"}%></h3>
     </div>
-    <div class="col-xs-12 col-sm-5 col-sm-offset-1 text-center">
-      <h2>Dates planned</h2>
+  </div>
+  <div class="row">
+
+    <div class="content col-xs-12 col-sm-8">
+      <p class="category"><%= @lesson.yoga_category %></p>
+      <p class="category"><%= @lesson.address %></p>
+    <div class="pictures">
+
+      <% @lesson.photos.each do |photo| %>
+        <div class="pic1 col-xs-4">
+          <%= cl_image_tag photo.path, width: 230, height: 100,crop: :fill %>
+        </div>
+      <% end %>
+    </div>
+      <p><%= @lesson.description %></p>
+    </div>
+    <div class="session col-xs-12 col-sm-4">
+      <h3>Dates available for booking</h3>
       <ul class="list-unstyled">
         <% @lesson.sessions.each do |session| %>
-        <li> <h4><%=session.starts_at%></h4> </li>
-        <li><%= link_to "Cancel session", session_path(session), method:"delete"%></li>
+        <li> <h4><%=session.starts_at%>
+        <%= link_to '<i class="fa fa-trash"></i>'.html_safe, session_path(session), html_options={:class=>"small-icons", method:"delete"}%></h4> </li>
         <%end%>
       </ul>
       <%= simple_form_for [@lesson, @session] do |f| %>
@@ -24,23 +36,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <div class="small-padded"></div>
-          <h2>Lesson's pictures</h2>
-          <div class="small-padded"></div>
-        </div>
-        <% @lesson.photos.each do |photo| %>
-          <div class="col-xs-12 col-sm-4">
-            <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-          </div>
-        <% end %>
-      </div>
-    </div>
   </div>
-<%= link_to 'Back to list', lessons_path %>
-
 </div>
 
 <% content_for :after_js do %>
