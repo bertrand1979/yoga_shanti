@@ -18,6 +18,7 @@ class LessonsController < ApplicationController
   def show
     @lesson = Lesson.find(params[:id])
     @sessions = @lesson.sessions
+    @session = Session.new
   end
 
  def new
