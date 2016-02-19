@@ -9,14 +9,16 @@
   <div class="row">
     <div class="content col-xs-12 col-sm-8">
       <p class="category"><%= @lesson.yoga_category %></p>
-      <p class="category"><%= @lesson.address %></p>
-      <div class="pictures">
+      <p class="category"><%= @lesson.address %><%= link_to ' <i class="fa fa-street-view"></i>  View'.html_safe, lesson_path(:anchor =>"map_lesson"), html_options={:class=>"small-icons"}%></p>
+
+    <div class="pictures">
+      <div id="owl-demo" class="">
         <% @lesson.photos.each do |photo| %>
-          <div class="pic1 col-xs-4">
-            <%= cl_image_tag photo.path, width: 230, height: 100,crop: :fill %>
-          </div>
+        <div class="item" style="background-image: url(<%= cloudinary_url photo.path %>)">
+        </div>
         <% end %>
       </div>
+    </div>
       <p><%= @lesson.description %></p>
     </div>
     <div class="session col-xs-12 col-sm-4">
@@ -32,9 +34,52 @@
       <%= render 'sessions/form', lesson:@lesson, session:@session %>
     </div>
   </div>
-  <div class="row">
+  <div class="row col-xs-12 col-sm-8 text-center" id="map_lesson">
+  <p><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=600x225&sensor=false&maptype=roadmap&markers=color:red|#{@lesson.address}" %></p>
   </div>
 </div>
+
+
+<<<<<<< HEAD
+=======
+
+<% content_for :after_js do %>
+  <%=javascript_tag do %>
+    $('#session_starts_at').datepicker({
+    });
+    $(document).ready(function() {
+
+      $("#owl-demo").owlCarousel({
+
+          navigation : false, // Show next and prev buttons
+          navigationText : ["prev","next"],
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          ///singleItem:true
+
+          // "singleItem:true" is a shortcut for:
+          items : 2,
+          // itemsDesktop : false,
+          // itemsDesktopSmall : false,
+          // itemsTablet: false,
+          // itemsMobile : false
+
+          baseClass : "owl-carousel",
+          theme : "owl-theme",
+
+          //Lazy load
+    lazyLoad : false,
+    lazyFollow : true,
+    lazyEffect : "fade",
+
+      });
+    });
+
+  <%end%>
+<%end%>
+>>>>>>> 157067b5cd3e2082c49525f942f26fedc5846e79
+
+
 
 
 
