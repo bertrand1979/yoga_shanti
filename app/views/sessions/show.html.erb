@@ -11,6 +11,7 @@
       <p><%= @session.lesson.description %></p>
     </div>
     <div class="col-xs-12 col-sm-6">
+    <div id="booking">
      <h2 id="h2_session">Booking</h2>
       <% if @session.conf_status == false %>
           <p id="green"><%= @session.starts_at %> - <%= @session.lesson.price %>€</p>
@@ -54,6 +55,7 @@
             <% end %>
             </div>
         <% end %>
+      </div>
     </div>
   </div>
 
