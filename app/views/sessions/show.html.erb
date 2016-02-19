@@ -2,9 +2,12 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6" id="booking-box">
       <h2 id="h2_session"><%= @session.lesson.name %></h2>
-      <p><% @session.lesson.photos.each do |photo| %>
-        <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-      <% end %></p>
+      <div id="owl-demo" class="">
+        <% @session.lesson.photos.each do |photo| %>
+        <div class="item" style="background-image: url(<%= cloudinary_url photo.path %>)">
+        </div>
+        <% end %>
+      </div>
     </div>
     <div class="col-xs-12 col-sm-6" id="booking-box">
      <h2 id="h2_session">Booking</h2>
@@ -63,3 +66,39 @@
     </div>
   </div>
 </div>
+
+
+<% content_for :after_js do %>
+  <%=javascript_tag do %>
+    $('#session_starts_at').datepicker({
+    });
+    $(document).ready(function() {
+
+      $("#owl-demo").owlCarousel({
+
+          navigation : false, // Show next and prev buttons
+          navigationText : ["prev","next"],
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          ///singleItem:true
+
+          // "singleItem:true" is a shortcut for:
+          items : 2,
+          // itemsDesktop : false,
+          // itemsDesktopSmall : false,
+          // itemsTablet: false,
+          // itemsMobile : false
+
+          baseClass : "owl-carousel",
+          theme : "owl-theme",
+
+          //Lazy load
+    lazyLoad : false,
+    lazyFollow : true,
+    lazyEffect : "fade",
+
+      });
+    });
+
+  <%end%>
+<%end%>
