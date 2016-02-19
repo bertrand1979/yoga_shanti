@@ -2,8 +2,25 @@
 <div class="container padded">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <% unless params[:where].nil? && params[:when].nil? %>
+        <div class="row text-center" id="results">
+          <h2>Become a master of Yoga</h2>
+          <% unless params[:where] == ""%>
+            <h4>Classes located near : <%= params[:where]%></h4>
+          <% end %>
+          <% unless params[:when] == ""%>
+            <h4>on the <%= params[:when]%></h4>
+          <% end %>
+          <div class="small-padded"></div>
+          <h4><a href="#banner" class="btn btn-primary">Back to search</a></h4>
+          <div class="small-padded"></div>
+        </div>
+      <% end %>
       <div class="row">
-      <div id="map" style="width: 100%; height: 300px;"></div>
+        <div id="map" style="width: 100%; height: 300px;"></div>
+        <div class="small-padded"></div>
+      </div>
+      <div class="row">
         <% @sessions.each do |session| %>
           <div class="col-xs-12 col-sm-4">
             <%= render "shared/card", session: session%>
