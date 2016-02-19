@@ -58,9 +58,10 @@ input {
 margin-right: 40px;
 }
 
-.day.today{
-   background-color: #DBC293;
-
+.datepicker table tr td.today {
+    color: #000000;
+    background-color: #DBC293;
+    border-color: #ffb733;
 }
 
 // input[type="search"]::-webkit-search-decoration,
