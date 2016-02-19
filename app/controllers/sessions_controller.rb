@@ -14,11 +14,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @session = @lesson.sessions.build(session_params)
+    @session = @lesson.sessions.new(session_params)
     if @session.save
-    redirect_to lesson_path(@session.lesson)
+      redirect_to lesson_path(@session.lesson)
+
     else
-      render :new
+      #@lesson.sessions.last.destroy
+      render 'lessons/show'
     end
   end
 

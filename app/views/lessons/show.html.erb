@@ -23,8 +23,10 @@
       <h3>Dates available for booking</h3>
       <ul class="list-unstyled">
         <% @lesson.sessions.each do |session| %>
-        <li> <h4><%=session.starts_at%>
-        <%= link_to '<i class="fa fa-trash"></i>'.html_safe, session_path(session), html_options={:class=>"small-icons", method:"delete"}%></h4> </li>
+          <% if session.persisted? %>
+            <li> <h4><%=session.starts_at%>
+            <%= link_to '<i class="fa fa-trash"></i>'.html_safe, session_path(session), html_options={:class=>"small-icons", method:"delete"}%></h4> </li>
+          <%end%>
         <%end%>
       </ul>
       <%= simple_form_for [@lesson, @session] do |f| %>
@@ -40,7 +42,9 @@
 <% content_for :after_js do %>
   <%=javascript_tag do %>
     $('#session_starts_at').datepicker({
-    });
+    format: "yyyy/mm/dd",
+    todayHighlight: true
+  });
   <%end%>
 <%end%>
 
