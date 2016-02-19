@@ -19,9 +19,9 @@
         <% end %>
       </div>
     </div>
-      <p><%= @lesson.description %></p>
+      <p id="ldescription"><%= @lesson.description %></p>
     </div>
-    <div class="session col-xs-12 col-sm-4">
+    <div class="session col-xs-12 col-sm-4" id="add_a_session">
       <h3>Dates available for booking</h3>
       <ul class="list-unstyled" id="sessions">
         <% @lesson.sessions.each do |session| %>
