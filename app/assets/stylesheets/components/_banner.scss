@@ -25,3 +25,43 @@ color: white;
 font-size: 50px;
 margin-top: 200px;
 }
+
+.hpsearch {
+  background-color: transparent;
+  color: gray;
+  border-bottom: 2px solid;
+}
+input {
+  outline: none;
+  border: 0px inset;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #DBC293;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #DBC293;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #DBC293;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #DBC293;
+}
+:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+  color:    #DBC293;
+}
+
+.form-group {
+margin-right: 40px;
+}
+
+
+// input[type="search"]::-webkit-search-decoration,
+// input[type="search"]::-webkit-search-cancel-button,
+// input[type="search"]::-webkit-search-results-button,
+// input[type="search"]::-webkit-search-results-decoration {
+//   display: none;
+// }
