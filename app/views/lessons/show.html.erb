@@ -21,7 +21,7 @@
     </div>
     <div class="session col-xs-12 col-sm-4">
       <h3>Dates available for booking</h3>
-      <ul class="list-unstyled">
+      <ul class="list-unstyled" id="sessions">
         <% @lesson.sessions.each do |session| %>
           <% if session.persisted? %>
             <li> <h4><%=session.starts_at%>
@@ -29,22 +29,12 @@
           <%end%>
         <%end%>
       </ul>
-      <%= simple_form_for [@lesson, @session] do |f| %>
-        <%= f.text_field :starts_at, label:false, placeholder:"Add a session", class:"text-center" %>
-        <%= f.submit "Ok" %>
-      <% end %>
+      <%= render 'sessions/form', lesson:@lesson, session:@session %>
     </div>
   </div>
   <div class="row">
   </div>
 </div>
 
-<% content_for :after_js do %>
-  <%=javascript_tag do %>
-    $('#session_starts_at').datepicker({
-    format: "yyyy/mm/dd",
-    todayHighlight: true
-  });
-  <%end%>
-<%end%>
+
 

@@ -1,0 +1,4 @@
+<% if session.persisted? %>
+  <li> <h4><%=session.starts_at%>
+  <%= link_to '<i class="fa fa-trash"></i>'.html_safe, session_path(session), html_options={:class=>"small-icons", method:"delete"}%></h4> </li>
+<%end%>

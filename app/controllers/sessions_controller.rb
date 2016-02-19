@@ -16,11 +16,15 @@ class SessionsController < ApplicationController
   def create
     @session = @lesson.sessions.new(session_params)
     if @session.save
-      redirect_to lesson_path(@session.lesson)
-
+      respond_to do |format|
+        format.html { redirect_to lesson_path(@session.lesson) }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
     else
-      #@lesson.sessions.last.destroy
-      render 'lessons/show'
+      respond_to do |format|
+        format.html { render 'lessons/show' }
+        format.js  # <-- idem
+      end
     end
   end
 
