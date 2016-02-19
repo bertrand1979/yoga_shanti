@@ -1,29 +1,20 @@
+<%= render "shared/banner_small", text:"Edit your class",text2:"", picture: 'http://www.findhealthtips.com/wp-content/uploads/2015/06/yoga-classes.jpg'%>
+<div class="small-padded"></div>
 
-<h1>Edit your class</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <%= simple_form_for(@lesson) do |f| %>
+        <%= f.error_notification %>
 
-  <%= simple_form_for(@lesson) do |f| %>
-  <%= f.error_notification %>
-
-  <%= f.input :name, :input_html => {:maxlength => 15, :size => 40} %>
-  <%= f.input :address,:input_html => { :id => "user_input_autocomplete_address"} %>
-  <%= f.input :price, collection: 1..100 %>
-  <%= f.input :description %>
-  <%= f.input :yoga_category, collection: ["Hatha", "Vinyasa", "Asthanga", "Jivamukti", "Iyengar", "Bikram", "Hot yoga", "Yin yoga", "Acroyoga"] %>
-  <%= f.input :photos, as: :attachinary %>
-
-<%= f.button :submit,'Update this class' %>
-
- <% end %>
-
-<!-- Include Google Maps JS API -->
-<script type="text/javascript"
-  src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAeNsutHdohOVTLJjZLhkYc_DgVCZqWaB8">
-</script>
-
-<!-- Custom JS code to bind to Autocomplete API -->
-<!-- find it here: https://github.com/lewagon/google-place-autocomplete/blob/gh-pages/autocomplete.js -->
-<!-- We'll detail this file in the article -->
-
-
-    <!-- Custom JS code to bind to Autocomplete API -->
-    <% javascript_include_tag 'autocomplete' %>
+        <%= f.input :name, placeholder: '15 characters max, e.g "Vinyasa 90 mn"', :input_html => {:maxlength => 15, :size => 40} %>
+        <%= f.input :address, placeholder: "16 villa Gaudelet 75011 Paris", :input_html => { :id => "user_input_autocomplete_address" } %>
+        <%= f.input :price, placeholder: 'Price in Euros', collection: 1..100 %>
+        <%= f.input :description, placeholder: 'This a 90mn yoga class with a specific focus on breathing and etc.'%>
+        <%= f.input :yoga_category, collection: ['Hatha', 'Vinyasa', 'Asthanga', 'Jivamukti', 'Iyengar', 'Bikram', 'Hot yoga', 'Yin yoga', 'Acroyoga'] %>
+        <%= f.input :photos, as: :attachinary %>
+        <%= f.button :submit, 'Create a class'%>
+      <% end %>
+    </div>
+  </div>
+</div>
