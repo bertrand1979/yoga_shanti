@@ -28,7 +28,7 @@ margin-top: 200px;
 
 .hpsearch {
   background-color: transparent;
-  color: gray;
+  color: white;
   border-bottom: 2px solid;
 }
 input {
@@ -58,6 +58,10 @@ input {
 margin-right: 40px;
 }
 
+.day.today{
+   background-color: #DBC293;
+
+}
 
 // input[type="search"]::-webkit-search-decoration,
 // input[type="search"]::-webkit-search-cancel-button,
