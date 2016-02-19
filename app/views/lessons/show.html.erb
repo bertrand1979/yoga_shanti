@@ -7,18 +7,16 @@
     </div>
   </div>
   <div class="row">
-
     <div class="content col-xs-12 col-sm-8">
       <p class="category"><%= @lesson.yoga_category %></p>
       <p class="category"><%= @lesson.address %></p>
-    <div class="pictures">
-
-      <% @lesson.photos.each do |photo| %>
-        <div class="pic1 col-xs-4">
-          <%= cl_image_tag photo.path, width: 230, height: 100,crop: :fill %>
-        </div>
-      <% end %>
-    </div>
+      <div class="pictures">
+        <% @lesson.photos.each do |photo| %>
+          <div class="pic1 col-xs-4">
+            <%= cl_image_tag photo.path, width: 230, height: 100,crop: :fill %>
+          </div>
+        <% end %>
+      </div>
       <p><%= @lesson.description %></p>
     </div>
     <div class="session col-xs-12 col-sm-4">

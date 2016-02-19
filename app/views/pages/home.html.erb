@@ -44,5 +44,15 @@
      });
    });
   <% end %>
+
+  <%=javascript_tag do %>
+    $('#Date').datepicker({
+    format: "yyyy/mm/dd",
+    todayHighlight: true
+  });
+  <%end%>
+
+
+
 <% end %>
 
