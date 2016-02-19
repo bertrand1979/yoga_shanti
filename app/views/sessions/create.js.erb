@@ -1,0 +1,23 @@
+<% if @session.errors.any? %>
+  // Render new review form with errors
+  $('#new_session').html("<%= j render 'sessions/form', lesson: @lesson, session: @session %>");
+
+<% else %>
+  // Create a paragraph for the new review. But hide it.
+  var new_session = $("<%= j render 'sessions/session_schedule', session: @session %>").hide();
+  // Add it to the DOM, at the end of the existing reviews. It's still hidden.
+  $('#sessions').append(new_session);
+  // Show the new review with an animation!
+  new_session.slideDown();
+  // Remove the text from the content textarea.
+  $('#session_starts_at').val('');
+
+    $('#new_session').html("<%= j render 'sessions/form', lesson: @lesson, session: Session.new %>");
+
+<% end %>
+
+
+$('#session_starts_at').datepicker({
+    format: "yyyy/mm/dd",
+    todayHighlight: true
+  });

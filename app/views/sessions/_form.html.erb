@@ -1,4 +1,25 @@
-<%= simple_form_for [@lesson, @session] do |f| %>
-  <%= f.input :starts_at %>
-  <%= f.submit "add a session" %>
+<%= simple_form_for([lesson, session], remote: true) do |f| %>
+<% if f.object.errors.any? %>
+  <div id="error_explanation">
+   <div class="alert alert-error">
+     The form contains <%= pluralize(f.object.errors.count, "error") %>.
+   </div>
+  <ul>
+   <% f.object.errors.full_messages.each do |msg| %>
+    <li>* <%= msg %></li>
+   <% end %>
+ </ul>
+</div>
 <% end %>
+  <%= f.text_field :starts_at, label:false, placeholder:"Add a session", class:"text-center" %>
+  <%= f.submit "Ok" %>
+<% end %>
+
+<% content_for :after_js do %>
+  <%= javascript_tag do %>
+    $('#session_starts_at').datepicker({
+    format: "yyyy/mm/dd",
+    todayHighlight: true
+  });
+  <%end%>
+<%end%>
