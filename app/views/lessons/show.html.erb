@@ -10,7 +10,7 @@
 
     <div class="content col-xs-12 col-sm-8">
       <p class="category"><%= @lesson.yoga_category %></p>
-      <p class="category"><%= @lesson.address %><%= link_to ' <i class="fa fa-street-view"></i>  View'.html_safe, edit_lesson_path(@lesson), html_options={:class=>"small-icons"}%></p>
+      <p class="category"><%= @lesson.address %><%= link_to ' <i class="fa fa-street-view"></i>  View'.html_safe, lesson_path(:anchor =>"map_lesson"), html_options={:class=>"small-icons"}%></p>
 
     <div class="pictures">
       <div id="owl-demo" class="">
@@ -36,7 +36,8 @@
       <% end %>
     </div>
   </div>
-  <div class="row">
+  <div class="row col-xs-12 col-sm-8 text-center" id="map_lesson">
+  <p><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=600x225&sensor=false&maptype=roadmap&markers=color:red|#{@lesson.address}" %></p>
   </div>
 </div>
 
