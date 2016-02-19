@@ -10,7 +10,7 @@
 
     <div class="content col-xs-12 col-sm-8">
       <p class="category"><%= @lesson.yoga_category %></p>
-      <p class="category"><%= @lesson.address %></p>
+      <p class="category"><%= @lesson.address %><%= link_to ' <i class="fa fa-street-view"></i>  View'.html_safe, edit_lesson_path(@lesson), html_options={:class=>"small-icons"}%></p>
     <div class="pictures">
 
       <% @lesson.photos.each do |photo| %>
