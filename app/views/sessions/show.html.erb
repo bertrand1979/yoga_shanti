@@ -19,7 +19,7 @@
             <%= simple_form_for @session do |f| %>
             <%= f.input :conf_status, :as => :hidden, input_html: { value: true } %>
             <%= f.input :user_id, :as => :hidden, input_html: { value: current_user.id } %>
-            <%= f.submit 'Book the class', class: 'btn btn-success space', style: "width: 58%"%>
+            <%= f.submit 'Book the class', class: 'btn btn-success space', style: "width: 57%"%>
             <% sessions = Session.all %>
             <% id_array = [] %>
             <% sessions.each do |session| %>
@@ -42,7 +42,7 @@
             <%= simple_form_for @session do |f| %>
             <%= f.input :conf_status, :as => :hidden, input_html: { value: false } %>
             <%= f.input :user_id, :as => :hidden, input_html: { value: nil } %>
-            <%= f.submit 'Unbook the class', class: 'btn btn-danger space', style: "width: 58%"%>
+            <%= f.submit 'Unbook the class', class: 'btn btn-danger space', style: "width: 57%"%>
             <% sessions = Session.all %>
             <% id_array = [] %>
             <% sessions.each do |session| %>
