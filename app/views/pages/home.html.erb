@@ -1,5 +1,5 @@
 <%= render "banner", session:@session %>
-<div class="container padded">
+<div class="container padded" id="results">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
       <% unless params[:where].nil? && params[:when].nil? %>
@@ -12,7 +12,7 @@
             <h4>on the <%= params[:when]%></h4>
           <% end %>
           <div class="small-padded"></div>
-          <h4><a href="#banner" class="btn btn-primary">Back to search</a></h4>
+          <h4><a href="#" class="btn btn-primary" id="back-top">Back to search</a></h4>
           <div class="small-padded"></div>
         </div>
       <% end %>

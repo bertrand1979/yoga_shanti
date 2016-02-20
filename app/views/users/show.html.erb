@@ -1,91 +1,100 @@
 <%= render "shared/banner_small", text:"Dashboard",text2:"", picture: 'http://www.findhealthtips.com/wp-content/uploads/2015/06/yoga-classes.jpg'%>
-<div class="small-padded"></div>
 
+      <div class="container profile-header-container text-center">
 
-<div class="container text-center profile">
-  <div class="row">
-    <div class="col-xs-12 col-sm-5 col-sm-offset-1">
-      <% if current_user.id == @user.id %>
-        <h2> My personnal info </h2>
-      <% else %>
-        <h2><%=@user.first_name%>'s info</h2>
-      <%end%>
-      <div class="small-padded"></div>
-      <%= image_tag(@user.picture, html_option = {class:"img-circle", width:"100px"}) %>
-      <div class="small-padded"></div>
-      <ul class="list-unstyled">
-        <li><h5>First name : <%= @user.first_name %></h5></li>
-        <li><h5>Last name : <%= @user.last_name %></h5></li>
-        <li><h5>Email : <%= @user.email %></h5></li>
-        <li><h5>Password : ******** </h5></li>
-        <li><h5>Birthdate : <%= @user.birth_date %></h5></li>
-        <li><h5>Description : <%= @user.description %></h5></li>
-        <li><h5>Started Yoga in : <%= @user.start_date %></h5></li>
-      </ul>
-      <% if current_user.id == @user.id %>
-        <div class="small-padded"></div>
-        <ul class="list-unstyled">
-           <li>
-            <%= link_to "Edit info", edit_user_path(@user), html_option={class:"btn btn-primary"} %>
-           </li>
-           <li>
-            <%= link_to "Change password", edit_user_registration_path%>
-           </li>
-         </ul>
-      <%end%>
-    </div>
-    <div class="col-xs-12 col-sm-5">
-    <h2>The classes I organize</h2>
-    <div class="small-padded"></div>
-    <%= image_tag("avatar.jpg", html_option = {class:"img-circle", width:"100px"}) %>
-    <div class="small-padded"></div>
-    <% if @user.lessons.count == 0 %>
-      <h4>No class added yet !</h4>
-      <ul class="list-unstyled">
-        <% if current_user.id == @user.id %>
-            <li>
+        <div class="tabs">
+          <a class="tab active" data-target="#profile">
+            <h3>My info</h3>
+          </a>
+          <a class="tab" data-target="#classes">
+            <h3>Classes I organize</h3>
+          </a>
+          <a class="tab" data-target="#sessions">
+            <h3>Sessions I booked</h3>
+          </a>
+        </div>
+      </div>
+
+    <div class="container text-center">
+      <div class="tab-content" id="profile">
+          <div class="row">
+            <div class="col-xs-12">
+              <% if current_user.id == @user.id %>
+              <% else %>
+                <h2><%=@user.first_name%>'s info</h2>
+              <%end%>
               <div class="small-padded"></div>
-              <%=link_to "Create a new class", new_lesson_path, class:"btn btn-primary"%>
-            </li>
-        <%end%>
-      </ul>
-    <% else %>
-      <ul class="list-unstyled">
-        <% @user.lessons.each do |lesson| %>
-          <li><%= link_to lesson_path(lesson) do %>
-            <h4><%=lesson.name%></h4>
-          <%end%>
-          </li>
-        <%end%>
-        <% if current_user.id == @user.id %>
-          <li>
-            <div class="small-padded"></div>
-            <%=link_to "Create a new class", new_lesson_path, class:"btn btn-primary"%>
-          </li>
-        <%end%>
-      </ul>
-    <%end%>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row text-center padded">
-  <h2>The classes I booked</h2>
-  </div>
-  <div class="row">
-    <div class="small-padded"></div>
-      <% sessions = Session.all %>
-      <% sessions.each do |session| %>
-        <% if session.user_id == current_user.id %>
-            <div class="col-xs-12 col-sm-4">
-            <%= render "shared/card", session: session%>
+              <%= image_tag(@user.picture, html_option = {class:"img-circle", width:"100px"}) %>
+              <div class="small-padded"></div>
+              <ul class="list-unstyled">
+                <li><h4>First name : <%= @user.first_name %></h4></li>
+                <li><h4>Last name : <%= @user.last_name %></h4></li>
+                <li><h4>Email : <%= @user.email %></h4></li>
+                <li><h4>Password : ******** </h4></li>
+                <li><h4>Birthdate : <%= @user.birth_date %></h4></li>
+                <li><h4>Description : <%= @user.description %></h4></li>
+                <li><h4>Started Yoga in : <%= @user.start_date %></h4></li>
+              </ul>
+              <% if current_user.id == @user.id %>
+                <div class="small-padded"></div>
+                <ul class="list-unstyled">
+                   <li>
+                    <%= link_to "Edit info", edit_user_path(@user), html_option={class:"btn btn-primary"} %>
+                   </li>
+                   <li>
+                    <%= link_to "Change password", edit_user_registration_path%>
+                   </li>
+                 </ul>
+              <%end%>
             </div>
-        <% end %>
-      <% end %>
-  </div>
-</div>
-
-
-</div>
+          </div>
+      </div>
+      <div class="tab-content hidden" id="classes">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="small-padded"></div>
+            <%= image_tag("avatar.jpg", html_option = {class:"img-circle", width:"100px"}) %>
+            <div class="small-padded"></div>
+            <% if @user.lessons.count == 0 %>
+              <h4>No class added yet !</h4>
+              <ul class="list-unstyled">
+                <% if current_user.id == @user.id %>
+                    <li>
+                      <div class="small-padded"></div>
+                      <%=link_to "Create a new class", new_lesson_path, class:"btn btn-primary"%>
+                    </li>
+                <%end%>
+              </ul>
+            <% else %>
+              <ul class="list-unstyled">
+                <% @user.lessons.each do |lesson| %>
+                  <li><%= link_to lesson_path(lesson) do %>
+                    <h4><%=lesson.name%></h4>
+                  <%end%>
+                  </li>
+            <%end%>
+              <% if current_user.id == @user.id %>
+                <li>
+                  <div class="small-padded"></div>
+                  <%=link_to "Create a new class", new_lesson_path, class:"btn btn-primary"%>
+                </li>
+              <%end%>
+            </ul>
+          <%end%>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content hidden" id="sessions">
+        <div class="row">
+            <% sessions = Session.all %>
+            <% sessions.each do |session| %>
+              <% if session.user_id == current_user.id %>
+                  <div class="col-xs-12 col-sm-4">
+                  <%= render "shared/card", session: session%>
+                  </div>
+              <% end %>
+            <% end %>
+        </div>
+      </div>
+    </div>
 
