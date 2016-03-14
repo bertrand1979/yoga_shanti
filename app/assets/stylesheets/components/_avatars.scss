@@ -1,10 +1,21 @@
 .avatar {
-  width: 30px;
+  width: 40px;
   border-radius: 50%;
+  transition: all 0.3s ease-in;
+  padding:1px;
+  &:hover {
+    border: 2px solid darken(#B39A6A, 13.5%);
+  }
+  &:focus {
+    border: 2px solid darken(#B39A6A, 13.5%);
+  }
 }
 .avatar-large {
   width: 40px;
   border-radius: 50%;
+  &:hover &:focus {
+    width:45px;
+  }
 }
 .avatar-bordered {
   width: 30px;
