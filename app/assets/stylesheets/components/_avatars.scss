@@ -6,15 +6,16 @@
   &:hover {
     border: 2px solid darken(#B39A6A, 13.5%);
   }
-  &:focus {
-    border: 2px solid darken(#B39A6A, 13.5%);
-  }
 }
 .avatar-large {
   width: 40px;
   border-radius: 50%;
-  &:hover &:focus {
-    width:45px;
+  transition: all 0.3s ease-in;
+  padding:1px;
+  opacity: 0.4;
+  &:hover {
+  opacity: 1;
+
   }
 }
 .avatar-bordered {
