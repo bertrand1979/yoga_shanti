@@ -9,6 +9,16 @@ class User < ActiveRecord::Base
   has_many :bookings
   has_many :sessions, through: :bookings
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :birth_date, presence: true, if: :teacher?
+  validates :start_date, presence: true, if: :teacher?
+  validates :description, presence: true, if: :teacher?
+
+  def teacher?
+    category == "teacher"
+  end
+
   def self.find_for_facebook_oauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider

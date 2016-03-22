@@ -26,8 +26,14 @@
       <ul class="list-unstyled" id="sessions">
         <% @lesson.sessions.each do |session| %>
           <% if session.persisted? %>
-            <li> <h4><%=session.starts_at%>
-            <%= link_to '<i class="fa fa-trash"></i>'.html_safe, session_path(session), html_options={:class=>"small-icons", method:"delete"}%></h4> </li>
+            <li><h4><%=session.starts_at%></h4></li>
+            <li>
+              <h4><%= pluralize(session.maxnumber, 'seat')%> open</h4>
+            </li>
+            <li>
+              <%= link_to '<i class="fa fa-trash"></i>'.html_safe, session_path(session), html_options={:class=>"small-icons", method:"delete"}%>
+            </li>
+
           <%end%>
         <%end%>
       </ul>

@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:starts_at, :conf_status, :user_id)
+    params.require(:session).permit(:starts_at, :conf_status, :maxnumber, :lesson_id)
   end
 
   def find_lesson

@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-
   root to: 'pages#home'
 
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users, only: [:show, :edit, :update]
+  devise_scope :user do
+    get 'users_teacher', to: 'devise/registrations#new_teacher'
+  end
 
   resources :lessons do
-    resources :sessions, only: [:new, :create]
+    resources :sessions, only: [:new, :create] do
+      resources :bookings, only: [:create, :destroy]
+    end
   end
+
   resources :sessions, except: [:new, :create]
 
   mount Attachinary::Engine => "/attachinary"

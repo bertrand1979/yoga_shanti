@@ -1,0 +1,34 @@
+<h2 class= "text-center">Sign up as a teacher</h2>
+<h4 class= "text-center">Spread the peace of yoga around you</h4>
+<div class="container">
+  <div class="container text-center">
+    <%- if controller_name != 'sessions' %>
+      <%= link_to "Log in", new_session_path(resource_name) %><br />
+      <%= link_to "Sign up as a student", new_user_registration_path(resource_name) %><br />
+    <% end -%>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true %>
+          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+          <%= f.input :password_confirmation, required: true %>
+          <%= f.input :first_name, required: true %>
+          <%= f.input :last_name, required: true %>
+          <%= f.input :birth_date, label:"Born", required: true %>
+          <%= f.input :start_date, label:"You started yoga in", required: true %>
+          <%= f.input :description, placeholder:"Tell us more about you and your practice of yoga !", required: true %>
+          <%= f.hidden_field :category, value: "teacher" %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Sign up" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

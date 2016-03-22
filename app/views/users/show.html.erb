@@ -9,8 +9,8 @@
           <a class="tab" data-target="#classes">
             <h3>Classes I organize</h3>
           </a>
-          <a class="tab" data-target="#sessions">
-            <h3>Sessions I booked</h3>
+          <a class="tab" data-target="#bookings">
+            <h3>My bookings</h3>
           </a>
         </div>
       </div>
@@ -84,13 +84,13 @@
           </div>
         </div>
       </div>
-      <div class="tab-content hidden" id="sessions">
+      <div class="tab-content hidden" id="bookings">
         <div class="row">
-            <% sessions = Session.all %>
-            <% sessions.each do |session| %>
-              <% if session.user_id == current_user.id %>
+            <% bookings = Booking.all %>
+            <% bookings.each do |booking| %>
+              <% if booking.user_id == current_user.id %>
                   <div class="col-xs-12 col-sm-4">
-                  <%= render "shared/card", session: session%>
+                  <%= render "shared/card", session: booking.session%>
                   </div>
               <% end %>
             <% end %>

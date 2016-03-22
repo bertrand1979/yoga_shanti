@@ -6,4 +6,5 @@ class Lesson < ActiveRecord::Base
   after_validation :geocode, if: :address_changed?
 
   validates :name, :address, :price, presence: true
+
 end

@@ -13,48 +13,18 @@
     <div class="col-xs-12 col-sm-6">
     <div id="booking">
      <h2 id="h2_session">Booking</h2>
-      <% if @session.conf_status == false %>
-          <p id="green"><%= @session.starts_at %> - <%= @session.lesson.price %>€</p>
-          <p id="green">Availability: 1 seat available</p>
-            <%= simple_form_for @session do |f| %>
-            <%= f.input :conf_status, :as => :hidden, input_html: { value: true } %>
-            <%= f.input :user_id, :as => :hidden, input_html: { value: current_user.id } %>
-            <%= f.submit 'Book the class', class: 'btn btn-success space', style: "width: 57%"%>
-            <% sessions = Session.all %>
-            <% id_array = [] %>
-            <% sessions.each do |session| %>
-            <% id_array << session.id %>
-            <% end %>
-            <% id_sample = id_array.shuffle.sample %>
-            <div class="list_block">
-                <li><%= link_to('See another class', session_path(id: id_sample), class: 'btn btn-info space', style: "width: 100%")%></li>
-                <li><%= link_to('Back to list of classes', root_path(:anchor =>"map"), class: 'btn btn-primary space', style: "width: 100%") %></li>
-            </div>
-            <% end %>
-        <% else %>
-        <% if current_user.id == @session.user_id %>
-            <% user_reg = User.find(@session.user_id) %>
-            <p>Person registered: <%= user_reg.first_name %> <%= user_reg.last_name %></p>
-            <p id="green">Cool, you have successfully booked this class!</p>
+      <% if @session.maxnumber != 0 %>
+        <% if @session.bookings.where(user_id: current_user.id) != []%>
+            You are successfully registered to this session
+            <%= link_to('Cancel my registration', lesson_session_booking_path(@session.lesson, @session, @session.bookings.where(user_id: current_user.id).first), method: :delete, class: 'btn btn-primary space', style: "width: 100%") %>(at least 24h priori session)
           <% else %>
-            <p id="red">Availability: 0 seat available, sorry, try another class!</p>
+            <p id="green">Availability: <%= pluralize(@session.maxnumber, 'seat') %> available</p>
+            <%= link_to 'Book now', lesson_session_bookings_path(@session.lesson, @session), method: :post, class: 'btn btn-success space' %>
           <% end %>
-            <%= simple_form_for @session do |f| %>
-            <%= f.input :conf_status, :as => :hidden, input_html: { value: false } %>
-            <%= f.input :user_id, :as => :hidden, input_html: { value: nil } %>
-            <%= f.submit 'Unbook the class', class: 'btn btn-danger space', style: "width: 57%"%>
-            <% sessions = Session.all %>
-            <% id_array = [] %>
-            <% sessions.each do |session| %>
-            <% id_array << session.id %>
-            <% end %>
-            <% id_sample = id_array.shuffle.sample %>
-            <div class="list_block">
-              <li><%= link_to('See another class', session_path(id: id_sample), class: 'btn btn-info space', style: "width: 100%") %></li>
-              <li><%= link_to('Back to list of classes', root_path(:anchor =>"map"), class: 'btn btn-primary space', style: "width: 100%") %></li>
-            <% end %>
-            </div>
-        <% end %>
+      <% else %>
+        Session fully booked, sorry.
+      <% end %>
+      <%= link_to('Back to list of classes', root_path(:anchor =>"map"), class: 'btn btn-primary space', style: "width: 100%") %>
       </div>
     </div>
   </div>

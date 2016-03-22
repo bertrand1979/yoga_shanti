@@ -21,8 +21,13 @@ class LessonsController < ApplicationController
     @session = Session.new
   end
 
- def new
-    @lesson = Lesson.new
+  def new
+    if current_user.category == "teacher"
+      @lesson = Lesson.new
+    else
+      flash[:alert] = "Only teachers can create a new lesson. Please log in with a teacher account"
+      redirect_to root_path
+    end
   end
 
   def create
