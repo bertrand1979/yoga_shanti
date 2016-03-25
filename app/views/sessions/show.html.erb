@@ -21,6 +21,9 @@
             <p id="green">Availability: <%= pluralize(@session.maxnumber, 'seat') %> available</p>
             <%= link_to 'Book now', lesson_session_bookings_path(@session.lesson, @session), method: :post, class: 'btn btn-success space' %>
           <% end %>
+      <% elsif @session.bookings.where(user_id: current_user.id) != [] %>
+        You are successfully registered to this session
+        <%= link_to('Cancel my registration', lesson_session_booking_path(@session.lesson, @session, @session.bookings.where(user_id: current_user.id).first), method: :delete, class: 'btn btn-primary space', style: "width: 100%") %>(at least 24h priori session)
       <% else %>
         Session fully booked, sorry.
       <% end %>

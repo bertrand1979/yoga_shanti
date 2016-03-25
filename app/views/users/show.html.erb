@@ -3,52 +3,27 @@
       <div class="container profile-header-container text-center">
 
         <div class="tabs">
-          <a class="tab active" data-target="#profile">
+          <% if current_user.category == "teacher" %>
+            <a class="tab" data-target="#classes">
+              <h3>Classes I organize</h3>
+            </a>
+          <% end %>
+          <% if current_user.category != "teacher" %>
+            <a class="tab active" data-target="#bookings">
+              <h3>My bookings</h3>
+            </a>
+          <% else %>
+            <a class="tab active" data-target="#teacher-schedule">
+              <h3>My schedule</h3>
+            </a>
+          <% end %>
+          <a class="tab" data-target="#profile">
             <h3>My info</h3>
-          </a>
-          <a class="tab" data-target="#classes">
-            <h3>Classes I organize</h3>
-          </a>
-          <a class="tab" data-target="#bookings">
-            <h3>My bookings</h3>
           </a>
         </div>
       </div>
 
     <div class="container text-center">
-      <div class="tab-content" id="profile">
-          <div class="row">
-            <div class="col-xs-12">
-              <% if current_user.id == @user.id %>
-              <% else %>
-                <h2><%=@user.first_name%>'s info</h2>
-              <%end%>
-              <div class="small-padded"></div>
-              <%= image_tag(@user.picture, html_option = {class:"img-circle", width:"100px"}) %>
-              <div class="small-padded"></div>
-              <ul class="list-unstyled">
-                <li><h4>First name : <%= @user.first_name %></h4></li>
-                <li><h4>Last name : <%= @user.last_name %></h4></li>
-                <li><h4>Email : <%= @user.email %></h4></li>
-                <li><h4>Password : ******** </h4></li>
-                <li><h4>Birthdate : <%= @user.birth_date %></h4></li>
-                <li><h4>Description : <%= @user.description %></h4></li>
-                <li><h4>Started Yoga in : <%= @user.start_date %></h4></li>
-              </ul>
-              <% if current_user.id == @user.id %>
-                <div class="small-padded"></div>
-                <ul class="list-unstyled">
-                   <li>
-                    <%= link_to "Edit info", edit_user_path(@user), html_option={class:"btn btn-primary"} %>
-                   </li>
-                   <li>
-                    <%= link_to "Change password", edit_user_registration_path%>
-                   </li>
-                 </ul>
-              <%end%>
-            </div>
-          </div>
-      </div>
       <div class="tab-content hidden" id="classes">
         <div class="row">
           <div class="col-xs-12">
@@ -84,17 +59,65 @@
           </div>
         </div>
       </div>
-      <div class="tab-content hidden" id="bookings">
+      <% if current_user.category != "teacher" %>
+        <div class="tab-content" id="bookings">
+          <div class="row">
+              <% bookings = Booking.all %>
+              <% bookings.each do |booking| %>
+                <% if booking.user_id == current_user.id %>
+                    <div class="col-xs-12 col-sm-4">
+                    <%= render "shared/card", session: booking.session%>
+                    </div>
+                <% end %>
+              <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="tab-content" id="teacher-schedule">
+          Your schedule
         <div class="row">
             <% bookings = Booking.all %>
             <% bookings.each do |booking| %>
-              <% if booking.user_id == current_user.id %>
+              <% if booking.session.lesson.user_id == current_user.id %>
                   <div class="col-xs-12 col-sm-4">
                   <%= render "shared/card", session: booking.session%>
                   </div>
               <% end %>
             <% end %>
         </div>
+      </div>
+      <div class="tab-content hidden" id="profile">
+          <div class="row">
+            <div class="col-xs-12">
+              <% if current_user.id == @user.id %>
+              <% else %>
+                <h2><%=@user.first_name%>'s info</h2>
+              <%end%>
+              <div class="small-padded"></div>
+              <%= image_tag(@user.picture, html_option = {class:"img-circle", width:"100px"}) %>
+              <div class="small-padded"></div>
+              <ul class="list-unstyled">
+                <li><h4>First name : <%= @user.first_name %></h4></li>
+                <li><h4>Last name : <%= @user.last_name %></h4></li>
+                <li><h4>Email : <%= @user.email %></h4></li>
+                <li><h4>Password : ******** </h4></li>
+                <li><h4>Birthdate : <%= @user.birth_date %></h4></li>
+                <li><h4>Description : <%= @user.description %></h4></li>
+                <li><h4>Started Yoga in : <%= @user.start_date %></h4></li>
+              </ul>
+              <% if current_user.id == @user.id %>
+                <div class="small-padded"></div>
+                <ul class="list-unstyled">
+                   <li>
+                    <%= link_to "Edit info", edit_user_path(@user), html_option={class:"btn btn-primary"} %>
+                   </li>
+                   <li>
+                    <%= link_to "Change password", edit_user_registration_path%>
+                   </li>
+                 </ul>
+              <%end%>
+            </div>
+          </div>
       </div>
     </div>
 

@@ -32,8 +32,9 @@
           </ul>
         </div>
       </div>
-      <%= link_to t(".top_call_to_action", default: "Create a class"), new_lesson_path(current_user), class: "navbar-wagon-item navbar-wagon-button btn" %>
-
+      <% if current_user.category == "teacher" %>
+        <%= link_to t(".top_call_to_action", default: "Create a class"), new_lesson_path(current_user), class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <% end %>
     <% else %>
 
       <!-- Login text link -->

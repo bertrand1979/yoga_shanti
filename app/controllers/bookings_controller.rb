@@ -9,6 +9,8 @@ class BookingsController < ApplicationController
       @session.save
       @session.maxnumber -= 1
       @session.save
+      @session.conf_status = true if @session.maxnumber == 0
+      @session.save
       flash[:notice] = "Your reservation is well booked, congrats !"
     end
     redirect_to :back
@@ -18,6 +20,7 @@ class BookingsController < ApplicationController
     if Date.today + 1 < @session.starts_at
       @session.bookings.where(user_id: current_user.id).destroy_all
       @session.maxnumber +=1
+      @session.conf_status = false
       @session.save
       flash[:alert]="You successfully canceled your booking to this event"
     else

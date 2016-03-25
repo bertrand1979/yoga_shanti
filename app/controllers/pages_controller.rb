@@ -7,7 +7,7 @@ class PagesController < ApplicationController
       @sessions = Session.all
       @lessons  = Lesson.all
     elsif params[:when] == "" || params[:when].nil?
-      @lessons = Lesson.near(params[:where],2).
+      @lessons = Lesson.near(params[:where],5).
                  joins(:sessions)
       @sessions = @lessons.map(&:sessions).flatten
     elsif params[:where] == "" || params[:where].nil?
@@ -15,7 +15,7 @@ class PagesController < ApplicationController
                  joins(:sessions).where(sessions: { starts_at: params[:when] })
       @sessions = @lessons.map(&:sessions).flatten
     else
-      @lessons = Lesson.near(params[:where],2).
+      @lessons = Lesson.near(params[:where],5).
                  joins(:sessions).where(sessions: { starts_at: params[:when] })
       @sessions = @lessons.map(&:sessions).flatten
     end

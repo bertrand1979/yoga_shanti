@@ -6,7 +6,12 @@ class SessionsController < ApplicationController
   end
 
   def show
-    @session = Session.find(params[:id])
+    if current_user
+      @session = Session.find(params[:id])
+    else
+      flash[:alert] = "Please log in or sign up to book a class"
+      redirect_to :back
+    end
   end
 
   def new

@@ -1,0 +1,46 @@
+<div class="lesson-card">
+  <div class="lessonpicture" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path(lesson.photos.first&.path, :width=>295, :height=>175, :crop => :fill, :gravity=>:face)%>);">
+    <div class="picture-description">
+      <h2><%= lesson.name %></h2>
+    </div>
+    <%= link_to "", session_path(lesson.sessions.first), :class => "lessoncard-link" %>
+  </div>
+  <div class="lesson-description">
+    <div class= "lesson-teacher">Teacher - <%= lesson.user.first_name %></div>
+    <div class="lesson-description-text">
+      <p><%= lesson.description.first(70) %></p>
+    </div>
+    <div class="lesson-adress">
+      <p>Address: <%= lesson.address %></p>
+    </div>
+    <div class="bring">
+      <span>Bring: </span>
+      <%= image_tag("exercise.png", width: '20px') %>
+      <%= image_tag("bottle.png", width: '20px') %>
+      <%= image_tag("bathroom.png", width: '20px') %>
+    </div>
+  </div>
+  <div class="lesson-price text-center">
+  <p>Price</p>
+    <p><%= lesson.price %> Euros</p>
+  </div>
+  <div class="lesson-schedule text-center">
+    <p>Schedule</p>
+    <% lesson.sessions.each do |session| %>
+      <div class="session-schedule">
+        <p id="session-start"><%= session.starts_at %></p>
+        <% if current_user && current_user.bookings.where(session_id: session.id) != [] %>
+          <p id="lessoncard-registered">Registered!</p>
+        <% elsif session.conf_status==false %>
+          <%= link_to "Book now", session_path(session), id: "card-non-booked" %>
+          <% else %>
+          <p id="card-booked">Class full</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+

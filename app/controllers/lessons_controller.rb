@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-
+  before_action :find_lesson, only: [:edit, :update, :delete, :show]
   def index
     @lessons = Lesson.all
     @markers = Gmaps4rails.build_markers(@lessons) do |lesson, marker|
@@ -16,9 +16,14 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @lesson = Lesson.find(params[:id])
-    @sessions = @lesson.sessions
-    @session = Session.new
+    if current_user.category == "teacher" && @lesson.user.id == current_user.id
+      @sessions = @lesson.sessions
+      @session = Session.new
+    else
+      raise
+      flash[:alert] = "Only the creator of this lesson can access to it"
+      redirect_to :back
+    end
   end
 
   def new
@@ -40,7 +45,6 @@ class LessonsController < ApplicationController
   end
 
   def update
-    @lesson = Lesson.find(params[:id])
     if @lesson.update(lesson_params)
       redirect_to lesson_path(@lesson)
     else render :new
@@ -48,11 +52,9 @@ class LessonsController < ApplicationController
   end
 
   def edit
-    @lesson = Lesson.find(params[:id])
   end
 
   def delete
-    @lesson = Lesson.find(params[:id])
     @lesson.destroy
     redirect_to user_lessons_path(@lesson)
   end
@@ -62,5 +64,7 @@ class LessonsController < ApplicationController
   def lesson_params
   params.require(:lesson).permit(:name, :address, :price, :description, :yoga_category, photos: [])
   end
-
+  def find_lesson
+    @lesson = Lesson.find(params[:id])
+  end
 end

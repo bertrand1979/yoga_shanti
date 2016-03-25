@@ -1,0 +1,95 @@
+.lesson-card{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 10px;
+  background-color: #E7E4E4;
+  margin-bottom: 20px;
+#lessoncard-registered{
+  color: green;
+}
+.lesson-description-text{
+  min-height:2.5em;
+  width: 100%;
+  p{
+    word-wrap: break-word;
+  }
+}
+  .lesson-adress{
+    p{
+      margin-bottom: 0px !important;
+    }
+  }
+  .lessonpicture {
+    height: 115px;
+    width: 180px;
+    border-radius: 2px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    background-size: cover !important;
+    color: white;
+    position: relative;
+  }
+  .picture-description {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    h2{
+      margin-top:0px;
+    }
+  }
+  .picture-description h2 {
+    font-size: 24px;
+  }
+  .picture-description p {
+    font-size: 13px;
+  }
+  .lesson-description{
+    height: 115px;
+    flex: 1;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lesson-teacher{
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .lesson-price{
+    margin: 0 25px;
+    height: 115px;
+  }
+  .lessoncard-link {
+    position: absolute;
+    left:0;
+    right:0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index:2;
+    background: black;
+    opacity: 0;
+  }
+  .lessoncard-link:hover{
+    opacity: 0.1;
+  }
+
+  .session-schedule{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+    p{
+      margin: 0px;
+    }
+  }
+
+  .lesson-schedule{
+    height: 115px;
+  }
+
+  #session-start{
+    margin-right:10px;
+  }
+}
