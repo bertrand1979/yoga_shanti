@@ -52,7 +52,11 @@ class SessionsController < ApplicationController
 
   def destroy
     @session = Session.find(params[:id])
-    @session.destroy
+    if @session.destroy
+      flash[:notice] = "session successfully unscheduled"
+    else
+      flash[:alert] = "cannot cancel a session with students already registered"
+    end
     redirect_to :back
   end
 

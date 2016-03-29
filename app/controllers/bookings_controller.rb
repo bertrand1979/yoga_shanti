@@ -4,6 +4,8 @@ class BookingsController < ApplicationController
   def create
     if @session.bookings.where(user_id: current_user.id) != []
       flash[:alert] = "You are already registered for this session"
+    elsif @session.lesson.user_id == current_user.id
+      flash[:alert] = "You cannot register to your own class"
     else
       @booking = @session.bookings.create(user_id: current_user.id)
       @session.save

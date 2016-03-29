@@ -18,8 +18,8 @@
           <%= f.input :password_confirmation, required: true %>
           <%= f.input :first_name, required: true %>
           <%= f.input :last_name, required: true %>
-          <%= f.input :birth_date, label:"Born", required: true %>
-          <%= f.input :start_date, label:"You started yoga in", required: true %>
+          <%= f.input :birth_date, start_year: Date.today.year - 100, end_year: Date.today.year, label:"Born", required: true %>
+          <%= f.input :start_date, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year, order: [:year], label:"You started yoga in", required: true %>
           <%= f.input :description, placeholder:"Tell us more about you and your practice of yoga !", required: true %>
           <%= f.hidden_field :category, value: "teacher" %>
         </div>

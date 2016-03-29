@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def show
-    @sessions = current_user.sessions
+    @sessions = Session.all.select{|session| session.starts_at >= Date.today}.sort_by{|session| session.starts_at}
+    @bookings = Booking.all.select{|booking| booking.session.starts_at >= Date.today}.sort_by{|booking| booking.session.starts_at}
   end
 
 

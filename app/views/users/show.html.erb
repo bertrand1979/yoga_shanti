@@ -62,27 +62,25 @@
       <% if current_user.category != "teacher" %>
         <div class="tab-content" id="bookings">
           <div class="row">
-              <% bookings = Booking.all %>
-              <% bookings.each do |booking| %>
-                <% if booking.user_id == current_user.id %>
-                    <div class="col-xs-12 col-sm-4">
-                    <%= render "shared/card", session: booking.session%>
-                    </div>
-                <% end %>
+            <% @bookings.each do |booking| %>
+              <% if booking.user_id == current_user.id %>
+                <div class="col-xs-12">
+                  <%= render "shared/schedulecard", session: booking.session%>
+                </div>
               <% end %>
+            <% end %>
           </div>
         </div>
       <% end %>
       <div class="tab-content" id="teacher-schedule">
         <div class="row">
-            <% sessions = Session.all.sort_by{|session| session.starts_at} %>
-            <% sessions.each do |session| %>
-              <% if session.lesson.user_id == current_user.id %>
-                  <div class="col-xs-12">
-                  <%= render "shared/schedulecard", session: session%>
-                  </div>
-              <% end %>
+          <% @sessions.each do |session| %>
+            <% if session.lesson.user_id == current_user.id %>
+                <div class="col-xs-12">
+                <%= render "shared/schedulecard", session: session%>
+                </div>
             <% end %>
+          <% end %>
         </div>
       </div>
       <div class="tab-content hidden text-center" id="profile">

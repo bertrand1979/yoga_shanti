@@ -26,8 +26,23 @@
       </div>
     </div>
     <div class="lesson-price text-center">
-    <p>Price</p>
+      <% if current_user.category != 'teacher' %>
+        <p>Successfully registered ! </p>
+        <p><%= session.bookings.count -1 %> other yogi <%= 'student'.pluralize(session.bookings.count) %> participating </p>
+      <% else %>
+        <p><%= session.bookings.count %> <%= 'student'.pluralize(session.bookings.count) %> registered</p>
+      <% end %>
+    </div>
+    <div class="lesson-price text-center">
+      <p>Price</p>
       <p><%= session.lesson.price %> Euros</p>
+    </div>
+     <div class="lesson-button text-center">
+      <% if current_user.category != 'teacher' %>
+        <%= link_to 'Cancel my booking', lesson_session_booking_path(session.lesson, session, session.bookings.where(user_id: current_user.id).first), method: 'delete' %>
+      <% else %>
+        <%= link_to 'Cancel this session', session_path(session), method: 'delete' %>
+      <% end %>
     </div>
   </div>
 </div>
