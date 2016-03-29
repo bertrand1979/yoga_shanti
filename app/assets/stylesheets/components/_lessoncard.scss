@@ -5,6 +5,9 @@
   padding: 10px 10px;
   background-color: #E7E4E4;
   margin-bottom: 20px;
+  p{
+    font-size: 16px !important;
+  }
 #lessoncard-registered{
   color: green;
 }
@@ -91,5 +94,21 @@
 
   #session-start{
     margin-right:10px;
+  }
+}
+
+#schedule-date{
+  font-weight: bold;
+  font-size: 22px;
+  color: $green;
+  margin: 0px !important;
+}
+
+.schedule-card{
+  margin-bottom: 35px;
+  .lesson-price{
+    display: flex;
+    flex-direction : column;
+    justify-content: center;
   }
 }

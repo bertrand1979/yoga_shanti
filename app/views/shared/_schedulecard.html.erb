@@ -1,0 +1,36 @@
+<div class="schedule-card">
+  <div id="schedule-date">
+    <p><%= session.starts_at.strftime("%b %e, %l:%M %P") %></p>
+  </div>
+
+  <div class="lesson-card">
+    <div class="lessonpicture" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path(session.lesson.photos.first&.path, :width=>295, :height=>175, :crop => :fill, :gravity=>:face)%>);">
+      <div class="picture-description">
+        <h2><%= session.lesson.name %></h2>
+      </div>
+      <%= link_to "", session_path(session), :class => "lessoncard-link" %>
+    </div>
+    <div class="lesson-description">
+      <div class= "lesson-teacher">Teacher - <%= session.lesson.user.first_name %></div>
+      <div class="lesson-description-text">
+        <p><%= session.lesson.description.first(70) %></p>
+      </div>
+      <div class="lesson-adress">
+        <p>Address: <%= session.lesson.address %></p>
+      </div>
+      <div class="bring">
+        <span>Bring: </span>
+        <%= image_tag("exercise.png", width: '20px') %>
+        <%= image_tag("bottle.png", width: '20px') %>
+        <%= image_tag("bathroom.png", width: '20px') %>
+      </div>
+    </div>
+    <div class="lesson-price text-center">
+    <p>Price</p>
+      <p><%= session.lesson.price %> Euros</p>
+    </div>
+  </div>
+</div>
+
+
+
