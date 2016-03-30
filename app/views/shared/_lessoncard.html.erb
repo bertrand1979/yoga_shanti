@@ -10,7 +10,7 @@
     <div class="lesson-description">
       <div class= "lesson-teacher">Teacher - <%= lesson.user.first_name %></div>
       <div class="lesson-description-text">
-        <p><%= lesson.description.first(70) %></p>
+        <p><%= lesson.description.first(60) %>...</p>
       </div>
       <div class="lesson-adress">
         <p>Address: <%= lesson.address %></p>
@@ -28,7 +28,7 @@
     </div>
     <div class="lesson-schedule text-center">
       <p>Schedule</p>
-      <% sessions.each do |session| %>
+      <% sessions.first(3).each do |session| %>
         <div class="session-schedule">
           <p id="session-start"><%= session.starts_at.strftime('%b %e, %l:%M %P')%></p>
           <% if current_user && current_user.bookings.where(session_id: session.id) != [] %>

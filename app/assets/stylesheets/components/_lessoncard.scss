@@ -12,7 +12,7 @@
   color: green;
 }
 .lesson-description-text{
-  min-height:2.5em;
+  max-height:2.5em;
   width: 100%;
   p{
     word-wrap: break-word;
@@ -70,14 +70,12 @@
     right:0;
     top: 0;
     bottom: 0;
-    width: 100%;
+    width: 470%;
     z-index:2;
     background: black;
     opacity: 0;
   }
-  .lessoncard-link:hover{
-    opacity: 0.1;
-  }
+
 
   .session-schedule{
     display: flex;

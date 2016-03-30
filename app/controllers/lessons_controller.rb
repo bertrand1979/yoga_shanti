@@ -17,7 +17,7 @@ class LessonsController < ApplicationController
 
   def show
     if current_user.category == "teacher" && @lesson.user.id == current_user.id
-      @sessions = @lesson.sessions
+      @sessions = @lesson.sessions.select{|session| session.starts_at >= Date.today}.sort_by{|session| session.starts_at}
       @session = Session.new
     else
       raise

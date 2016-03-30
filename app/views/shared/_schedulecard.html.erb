@@ -17,7 +17,7 @@
     <div class="lesson-description">
       <div class= "lesson-teacher">Teacher - <%= session.lesson.user.first_name %></div>
       <div class="lesson-description-text">
-        <p><%= session.lesson.description.first(70) %></p>
+        <p><%= session.lesson.description.first(60) %>...</p>
       </div>
       <div class="lesson-adress">
         <p>Address: <%= session.lesson.address %></p>

@@ -24,6 +24,8 @@ gem "coffee-rails"
 gem "geocoder"
 gem "gmaps4rails"
 gem 'rails-assets-bootstrap-datepicker'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17', '>= 4.17.37'
 gem 'owlcarousel-rails'
 
 source 'https://rails-assets.org' do

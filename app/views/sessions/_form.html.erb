@@ -16,11 +16,23 @@
   <%= f.submit "Ok" %>
 <% end %>
 
+
+<div class='input-group date' id='datetimepicker1'>
+    <input type='text' class="form-control" />
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+
+</div>
+
+
+
 <% content_for :after_js do %>
   <%= javascript_tag do %>
     $('#session_starts_at').datepicker({
     format: "yyyy/mm/dd",
     todayHighlight: true
   });
+    $('#datetimepicker1').datetimepicker();
   <%end%>
 <%end%>

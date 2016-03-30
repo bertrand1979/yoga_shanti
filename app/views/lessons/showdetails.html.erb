@@ -27,13 +27,16 @@
           <div class="col-xs-6 text-center">
             <p> <%= session.starts_at.strftime('%b %e, %l:%M %P') %> </p>
           </div>
-          <div class="col-xs-6 text-center">
+          <div class="col-xs-6">
             <% if current_user && current_user.bookings.where(session_id: session.id) != [] %>
-              <p id="registered">Registered!</p>
+              <p id="registered">Registered!
+              <span class="left-margin"><%= link_to 'Cancel',lesson_session_booking_path(session.lesson, session, current_user.bookings.where(session_id: session.id).first), method: :delete %></span>  </p>
             <% elsif session.conf_status==false %>
-              <%= link_to "Book now", lesson_session_bookings_path(session.lesson, session), method: :post, id: "card-non-booked" %>
+              <p> <%= link_to "Book now", lesson_session_bookings_path(session.lesson, session), method: :post, id: "card-non-booked" %>
+              <span class="left-margin"><%= pluralize(session.maxnumber,'seat') %></span> </p>
             <% else %>
-              <p id="booked">Class full</p>
+              <p id="booked">Class full...
+              <span class="left-margin"> Sorry ! </span></p>
             <% end %>
           </div>
         </div>
