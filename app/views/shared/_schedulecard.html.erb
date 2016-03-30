@@ -8,7 +8,11 @@
       <div class="picture-description">
         <h2><%= session.lesson.name %></h2>
       </div>
-      <%= link_to "", session_path(session), :class => "lessoncard-link" %>
+      <% if session.lesson.user_id == current_user.id%>
+        <%= link_to "", lesson_path(session.lesson), :class => "lessoncard-link" %>
+      <% else %>
+        <%= link_to "", lesson_lesson_details_path(session.lesson), :class => "lessoncard-link" %>
+      <% end %>
     </div>
     <div class="lesson-description">
       <div class= "lesson-teacher">Teacher - <%= session.lesson.user.first_name %></div>

@@ -1,0 +1,87 @@
+<%= render "shared/banner_small", text:"",text2:"", picture: 'http://www.findhealthtips.com/wp-content/uploads/2015/06/yoga-classes.jpg'%>
+
+<div class="container">
+  <div class="row">
+    <div class="title">
+    <h3><%= @lesson.name %></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="content col-xs-12 col-sm-8">
+      <p class="category"><%= @lesson.yoga_category %></p>
+      <p class="category"><%= @lesson.address %></p>
+      <div class="pictures">
+        <div id="owl-demo" class="">
+          <% @lesson.photos.each do |photo| %>
+          <div class="item" style="background-image: url(<%= cloudinary_url photo.path %>)">
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <p id="ldescription"><%= @lesson.description %></p>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h3 class = 'text-center' id="scheduledetails">Schedule</h3>
+      <% @lesson.sessions.select{|session| session.starts_at >= Date.today}.sort!.each do |session| %>
+        <div class="row">
+          <div class="col-xs-6 text-center">
+            <p> <%= session.starts_at.strftime('%b %e, %l:%M %P') %> </p>
+          </div>
+          <div class="col-xs-6 text-center">
+            <% if current_user && current_user.bookings.where(session_id: session.id) != [] %>
+              <p id="registered">Registered!</p>
+            <% elsif session.conf_status==false %>
+              <%= link_to "Book now", lesson_session_bookings_path(session.lesson, session), method: :post, id: "card-non-booked" %>
+            <% else %>
+              <p id="booked">Class full</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row col-xs-12 col-sm-8" id="map_lesson">
+  <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=600x225&sensor=false&maptype=roadmap&markers=color:red|#{@lesson.address}" %>
+  </div>
+</div>
+
+
+<% content_for :after_js do %>
+  <%=javascript_tag do %>
+    $('#session_starts_at').datepicker({
+    });
+    $(document).ready(function() {
+
+      $("#owl-demo").owlCarousel({
+
+          navigation : false, // Show next and prev buttons
+          navigationText : ["prev","next"],
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          ///singleItem:true
+
+          // "singleItem:true" is a shortcut for:
+          items : 2,
+          // itemsDesktop : false,
+          // itemsDesktopSmall : false,
+          // itemsTablet: false,
+          // itemsMobile : false
+
+          baseClass : "owl-carousel",
+          theme : "owl-theme",
+
+          //Lazy load
+    lazyLoad : false,
+    lazyFollow : true,
+    lazyEffect : "fade",
+
+      });
+    });
+
+  <%end%>
+<%end%>
+
+
+
+
+

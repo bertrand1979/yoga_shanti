@@ -26,6 +26,11 @@ class LessonsController < ApplicationController
     end
   end
 
+  def showdetails
+    @lesson = Lesson.find(params[:lesson_id])
+    @sessions = @lesson.sessions
+  end
+
   def new
     if current_user.category == "teacher"
       @lesson = Lesson.new

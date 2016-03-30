@@ -5,7 +5,7 @@
       <div class="picture-description">
         <h2><%= lesson.name %></h2>
       </div>
-      <%= link_to "", session_path(lesson.sessions.first), :class => "lessoncard-link" %>
+      <%= link_to "", lesson_lesson_details_path(lesson), :class => "lessoncard-link" %>
     </div>
     <div class="lesson-description">
       <div class= "lesson-teacher">Teacher - <%= lesson.user.first_name %></div>
@@ -34,7 +34,7 @@
           <% if current_user && current_user.bookings.where(session_id: session.id) != [] %>
             <p id="lessoncard-registered">Registered!</p>
           <% elsif session.conf_status==false %>
-            <%= link_to "Book now", session_path(session), id: "card-non-booked" %>
+            <%= link_to "Book now", lesson_session_bookings_path(session.lesson, session), method: :post, id: "card-non-booked" %>
           <% else %>
             <p id="card-booked">Class full</p>
           <% end %>

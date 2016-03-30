@@ -9,7 +9,7 @@
             <h4>Classes located near : <%= params[:where]%></h4>
           <% end %>
           <% unless params[:when] == ""%>
-            <h4>on the <%= params[:when]%></h4>
+            <h4>on <%= params[:when].to_date.strftime('%b %e, %l:%M %P')%></h4>
           <% end %>
           <div class="small-padded"></div>
           <h4><a href="#" class="btn btn-primary" id="back-top">Back to search</a></h4>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :lessons do
+    get 'lesson_details', to: 'lessons#showdetails'
     resources :sessions, only: [:new, :create] do
       resources :bookings, only: [:create, :destroy]
     end

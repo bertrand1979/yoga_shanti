@@ -2,18 +2,22 @@ class BookingsController < ApplicationController
   before_action :find_session, only: [:create, :destroy]
 
   def create
-    if @session.bookings.where(user_id: current_user.id) != []
-      flash[:alert] = "You are already registered for this session"
-    elsif @session.lesson.user_id == current_user.id
-      flash[:alert] = "You cannot register to your own class"
+    if user_signed_in?
+      if @session.bookings.where(user_id: current_user.id) != []
+        flash[:alert] = "You are already registered for this session"
+      elsif @session.lesson.user_id == current_user.id
+        flash[:alert] = "You cannot register to your own class"
+      else
+        @booking = @session.bookings.create(user_id: current_user.id)
+        @session.save
+        @session.maxnumber -= 1
+        @session.save
+        @session.conf_status = true if @session.maxnumber == 0
+        @session.save
+        flash[:notice] = "Your reservation is well booked, congrats !"
+      end
     else
-      @booking = @session.bookings.create(user_id: current_user.id)
-      @session.save
-      @session.maxnumber -= 1
-      @session.save
-      @session.conf_status = true if @session.maxnumber == 0
-      @session.save
-      flash[:notice] = "Your reservation is well booked, congrats !"
+      flash[:alert] = "Please log in to book a lesson"
     end
     redirect_to :back
   end
