@@ -3,20 +3,15 @@ class PagesController < ApplicationController
 
   def home
 
-    @lessons  = Lesson.all
-    @future_lessons = @lessons.select do |lesson|
-     lesson.sessions.find{|session| session.starts_at >= Date.today}
-    end
+    @lessons = future_lesson(Lesson.all)
+    @sessions = Session.all.select{|session| session.starts_at >= Date.today}.sort_by{|session| session.starts_at}
 
     if (params[:when] == "" || params[:when].nil?) && (params[:where] == "" || params[:where].nil?)
-      @sessions = Session.all.select{|session| session.starts_at >= Date.today}.sort_by{|session| session.starts_at}
     elsif params[:when] == "" || params[:when].nil?
-      @lessons = Lesson.near(params[:where],5).
-                 joins(:sessions)
+      @lessons = future_lesson(Lesson.near(params[:where],5))
       @sessions = @lessons.map(&:sessions).flatten.select{|session| session.starts_at >= Date.today}.sort_by{|session| session.starts_at}
     elsif params[:where] == "" || params[:where].nil?
-      @lessons = Lesson.all.
-                 joins(:sessions).where(sessions: { starts_at: params[:when] })
+      @lessons = Lesson.all.joins(:sessions).where(sessions: { starts_at: params[:when] })
       @sessions = @lessons.map(&:sessions).flatten.select{|session| session.starts_at >= Date.today}.sort_by{|session| session.starts_at}
     else
       @lessons = Lesson.near(params[:where],5).
@@ -25,7 +20,7 @@ class PagesController < ApplicationController
     end
 
 
-    @markers = Gmaps4rails.build_markers(@future_lessons) do |lesson, marker|
+    @markers = Gmaps4rails.build_markers(@lessons) do |lesson, marker|
       marker.lat lesson.latitude
       marker.lng lesson.longitude
       marker.infowindow render_to_string(:partial => "lessons/infowindow", :locals => { :lesson => lesson})
@@ -34,4 +29,13 @@ class PagesController < ApplicationController
                       :height => 32})
     end
   end
+
+  private
+
+  def future_lesson(lessons)
+    lessons.select do |lesson|
+      lesson.sessions.find{|session| session.starts_at >= Date.today}
+    end
+  end
+
 end
