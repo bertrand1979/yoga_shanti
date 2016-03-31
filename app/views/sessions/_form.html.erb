@@ -20,6 +20,7 @@
 <% content_for :after_js do %>
   <%= javascript_tag do %>
     $('#session_starts_at').datetimepicker({
+    format:"DD/MM/YYYY, LT"
   });
   <%end%>
 <%end%>
