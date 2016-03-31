@@ -6,6 +6,3 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.destroy_all
-user1 = User.create(email: 'pierre@gmail.com', password: '12345678')
-user2 = User.create(email: 'paul@gmail.com', password: '12345678')
-user3 = User.create(email: 'jacques@gmail.com', password: '12345678')
