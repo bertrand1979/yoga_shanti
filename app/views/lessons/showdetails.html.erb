@@ -21,26 +21,28 @@
       <p id="ldescription"><%= @lesson.description %></p>
     </div>
     <div class="col-xs-12 col-sm-4">
-      <h3 class = 'text-center' id="scheduledetails">Schedule</h3>
-      <% @lesson.sessions.select{|session| session.starts_at >= Date.today}.sort!.each do |session| %>
-        <div class="row">
-          <div class="col-xs-6 text-center">
-            <p> <%= session.starts_at.strftime('%b %e, %l:%M %P') %> </p>
+      <div id="scheduledetails">
+        <h3 class = 'text-center'>Schedule</h3>
+        <% @lesson.sessions.select{|session| session.starts_at >= Date.today}.sort!.each do |session| %>
+          <div class="row">
+            <div class="col-xs-6">
+              <p> <%= session.starts_at.strftime('%b %e, %l:%M %P') %> </p>
+            </div>
+            <div class="col-xs-6">
+              <% if current_user && current_user.bookings.where(session_id: session.id) != [] %>
+                <p id="registered">Registered!
+                <span class="left-margin align-right"><%= link_to 'Cancel',lesson_session_booking_path(session.lesson, session, current_user.bookings.where(session_id: session.id).first), method: :delete %></span>  </p>
+              <% elsif session.conf_status==false %>
+                <p> <%= link_to "Book now", lesson_session_bookings_path(session.lesson, session), method: :post, id: "card-non-booked" %>
+                <span class="left-margin align-right"><%= pluralize(session.maxnumber,'seat') %></span> </p>
+              <% else %>
+                <p id="booked">Class full...
+                <span class="left-margin align-right"> Sorry ! </span></p>
+              <% end %>
+            </div>
           </div>
-          <div class="col-xs-6">
-            <% if current_user && current_user.bookings.where(session_id: session.id) != [] %>
-              <p id="registered">Registered!
-              <span class="left-margin"><%= link_to 'Cancel',lesson_session_booking_path(session.lesson, session, current_user.bookings.where(session_id: session.id).first), method: :delete %></span>  </p>
-            <% elsif session.conf_status==false %>
-              <p> <%= link_to "Book now", lesson_session_bookings_path(session.lesson, session), method: :post, id: "card-non-booked" %>
-              <span class="left-margin"><%= pluralize(session.maxnumber,'seat') %></span> </p>
-            <% else %>
-              <p id="booked">Class full...
-              <span class="left-margin"> Sorry ! </span></p>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row col-xs-12 col-sm-8" id="map_lesson">
