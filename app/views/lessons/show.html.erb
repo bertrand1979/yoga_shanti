@@ -26,17 +26,14 @@
       <ul class="list-unstyled" id="sessions">
         <% @sessions.each do |session| %>
           <% if session.persisted? %>
-            <li><h4><%=session.starts_at.strftime('%b %e, %l:%M %P')%></h4></li>
+            <li><h4><%=session.starts_at.strftime('%b %e, %l:%M %P')%> <%= link_to '<i class="fa fa-trash"></i>'.html_safe, session_path(session), html_options={:class=>"small-icons", method:"delete"}%></h4></li>
             <li>
               <p><%= pluralize(session.bookings.count, 'student') %> registered // <%= pluralize(session.maxnumber, 'seat') %> available</p>
             </li>
-            <li>
-              <%= link_to '<i class="fa fa-trash"></i>'.html_safe, session_path(session), html_options={:class=>"small-icons", method:"delete"}%>
-            </li>
-
           <%end%>
         <%end%>
       </ul>
+      <h4>Add a new session</h4>
       <%= render 'sessions/form', lesson:@lesson, session:@session %>
     </div>
   </div>
@@ -48,8 +45,7 @@
 
 <% content_for :after_js do %>
   <%=javascript_tag do %>
-    $('#session_starts_at').datepicker({
-    });
+
     $(document).ready(function() {
 
       $("#owl-demo").owlCarousel({

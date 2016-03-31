@@ -12,12 +12,9 @@
   // Remove the text from the content textarea.
   $('#session_starts_at').val('');
 
-    $('#new_session').html("<%= j render 'sessions/form', lesson: @lesson, session: Session.new %>");
+  $('#new_session').html("<%= j render 'sessions/form', lesson: @lesson, session: Session.new %>");
 
 <% end %>
 
 
-$('#session_starts_at').datepicker({
-    format: "yyyy/mm/dd",
-    todayHighlight: true
-  });
+
